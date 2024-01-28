@@ -21,12 +21,13 @@ systemForm.addEventListener("submit", function (e) {
   let sign = 0;
   let exponent = 0;
   let mantissa = 0;
+  let excess = precisionMode.localeCompare("simplePrecision") == 0 ? 127 : 1023; //Si el modo elegido es simple precisión, el exceso es 127. Sino (si es doble precisión), el exceso es 1023.
 
   //Escribimos lo que vamos a añadir al HTML:
   let html =
     "<h2>Resultado</h2>" +
     "<h4>Introducción</h4>" +
-    '<img src="./zonas.png"></img>' +
+    '<img src="./areas.png"></img>' +
     "<p>Para representar un número en el estándar IEEE P754 debemos saber si este pertenece a la zona normalizada o a la zona desnormalizada.</p>" +
     "<p>En función de la zona a la que pertenezca dicho número, emplearemos una fórmula u otra.</p>" +
     "<p>El exceso en simple precisión vale 127, y en doble precisión vale 1023.</p>" +
@@ -35,7 +36,7 @@ systemForm.addEventListener("submit", function (e) {
     " todos los números que existen. También vemos que el número 0, el infinito y las indeterminaciones son casos aparte de este sistema. Si ingresa alguno de estos " +
     "casos en la calculadora, podrá ver cómo se representan estos casos especiales.</p>" +
     "<h4>Formato de la representación</h4>" +
-    '<img src="./formato.png"></img>' +
+    '<img src="./format.png"></img>' +
     "<p>¿Qué son S,  E y M? Son términos de este estándar, ¡vamos a detallarlos!</p>" +
     '<div class="listContainer">' +
     '<dl class="myUL">' +
@@ -50,7 +51,7 @@ systemForm.addEventListener("submit", function (e) {
     "<p>La combinación de estos tres términos representa un número, y nosotros vamos a calcular estos para representar el número decimal dado.</p>" +
     "<p>Es decir, seremos capaces de escribir todos los 0 y 1 que representan el número decimal dado, usando IEEE P754.</p>" +
     "<h4>¿A qué zona pertenece el número?</h4>" +
-    '<img src="./puntos.png"></img>' +
+    '<img src="./points.png"></img>' +
     "<p>Como " +
     number +
     " no es un caso especial (no es +0, -0, +∞, -∞ o alguna indeterminación), este valor seguro que se encuentra o en la zona normalizada " +
@@ -61,6 +62,8 @@ systemForm.addEventListener("submit", function (e) {
     "una zona u otra.</p>";
   if (number > 0) {
     sign = 0; //Es positivo, por tanto S = 0.
+    exponent = 1; //E = 1.
+    mantissa = 0; //M = 0.
     html +=
       "<p>" +
       number +
@@ -74,7 +77,13 @@ systemForm.addEventListener("submit", function (e) {
       "<p>V(X) = (-1)<sup>S</sup> &times 1,M &times 2<sup>E-EXCESO</sup></p>" +
       "<p>V(X) = (-1)<sup>" +
       sign +
-      "</sup> &times 1,M &times 2<sup>E-EXCESO</sup></p>" +
+      "</sup> &times 1," +
+      mantissa +
+      " &times 2<sup>" +
+      exponent +
+      "-" +
+      excess +
+      "</sup></p>" +
       "</div>";
   } else {
     console.log("Numero negativo");
