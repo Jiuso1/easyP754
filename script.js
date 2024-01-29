@@ -32,6 +32,10 @@ systemForm.addEventListener("submit", function (e) {
   let exponent = 0;
   let mantissa = 0;
   let excess = precisionMode.localeCompare("simplePrecision") == 0 ? 127 : 1023; //Si el modo elegido es simple precisión, el exceso es 127. Sino (si es doble precisión), el exceso es 1023.
+  //Variables necesarias para los cálculos:
+  let y = 0;
+  let x = 0;
+  let roundedY = 0;
 
   //Escribimos lo que vamos a añadir al HTML:
   let html =
@@ -104,6 +108,10 @@ systemForm.addEventListener("submit", function (e) {
       "</div>";
     if (number > Math.pow(2, exponent - excess)) {
       //Si el número introducido por teclado es mayor que el punto azul, este se encuentra en la zona normalizada.
+      //Realizamos los cálculos pertinentes para mostrarlos más adelante:
+      y = Math.log2(number);
+      roundedY = Math.floor(y); //Redondeamos la y' al entero menor más próximo posible.
+
       html +=
         "<p>Como " +
         number +
@@ -130,8 +138,39 @@ systemForm.addEventListener("submit", function (e) {
         excess +
         '<span class="y_item">y</span></span></sup></p>' +
         "</div>" +
-        "<p>Supongo X = 1,0.</p>" +
-        "";
+        "<p>Supongo X = 1,0. La única incógnita será y'.</p>" +
+        '<div class="equation">' +
+        "<p>" +
+        number +
+        " = 1,0 &times 2<sup>y'</sup></p>" +
+        "</div>" +
+        '<div class="equation">' +
+        "<p>" +
+        number +
+        " = 2<sup>y'</sup></p>" +
+        "</div>" +
+        '<div class="equation">' +
+        "<p>log<sub>2</sub>(" +
+        number +
+        ") = y'</p>" +
+        "</div>" +
+        '<div class="equation">' +
+        "<p>y' = " +
+        y +
+        "</p>" +
+        "</div>" +
+        "<p>Redondeamos al entero menor más próximo.</p>" +
+        '<div class="equation">' +
+        "<p> y = " +
+        roundedY +
+        "</p>" +
+        "</div>" +
+        "<p>Sustituimos en la ecuación con recuadros de colores.</p>" +
+        '<div class="equation">' +
+        "<p>V(X) = " +
+        number +
+        " = x &times 2<sup></sup></p>" +
+        "</div>";
     }
   } else {
     console.log("Numero diferente");
