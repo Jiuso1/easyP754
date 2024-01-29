@@ -75,6 +75,8 @@ systemForm.addEventListener("submit", function (e) {
       "<p>Ya tenemos S, E y M, así que basta utilizar la fórmula de la zona normalizada y operar.</p>" +
       '<div class="equation">' +
       "<p>V(X) = (-1)<sup>S</sup> &times 1,M &times 2<sup>E-EXCESO</sup></p>" +
+      "</div>" +
+      '<div class="equation">' +
       "<p>V(X) = (-1)<sup>" +
       sign +
       "</sup> &times 1," +
@@ -84,7 +86,22 @@ systemForm.addEventListener("submit", function (e) {
       "-" +
       excess +
       "</sup></p>" +
+      "</div>" +
+      '<div class="equation">' +
+      "<p>V(X) = 2<sup>" +
+      (exponent - excess) +
+      "</sup></p>" +
       "</div>";
+    if (number > Math.pow(2, exponent - excess)) {
+      //Si el número introducido por teclado es mayor que el punto azul, este se encuentra en la zona normalizada.
+      html +=
+        "<p>Como " +
+        number +
+        " es mayor que el punto azul (" +
+        "2<sup>" +
+        (exponent - excess) +
+        "</sup>), se encuentra en la zona normalizada.</p>";
+    }
   } else {
     console.log("Numero negativo");
   }
