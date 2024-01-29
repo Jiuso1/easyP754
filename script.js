@@ -15,8 +15,10 @@ systemForm.addEventListener("submit", function (e) {
   if (formData.get("number").indexOf("**") != -1) {
     //Si contiene el operador exponente:
     number = eval(formData.get("number")); //Evaluamos y realizamos las operaciones aritméticas pertinentes.
+    console.log("Evalúo");
   } else {
     number = formData.get("number"); //No evaluamos ninguna expresión, simplemente transformamos la String a Number.
+    console.log("Transformo");
   }
 
   //Prueba recorriendo el Object formData con el iterador entries(). Usar typeof para comprobar tipos.
@@ -34,7 +36,7 @@ systemForm.addEventListener("submit", function (e) {
   //Escribimos lo que vamos a añadir al HTML:
   let html =
     "<h2>Resultado</h2>" +
-    "<h4>Introducción</h4>" +
+    '<h4><a name="introduccion">Introducción</a></h4>' +
     '<img src="./areas.png"></img>' +
     "<p>Para representar un número en el estándar IEEE P754 debemos saber si este pertenece a la zona normalizada o a la zona desnormalizada.</p>" +
     "<p>En función de la zona a la que pertenezca dicho número, emplearemos una fórmula u otra.</p>" +
@@ -76,8 +78,8 @@ systemForm.addEventListener("submit", function (e) {
       "<p>" +
       number +
       " es positivo, compararemos con el punto azul de la zona desnormalizada positiva. Es decir, con el número más pequeño de esa zona.</p>" +
-      "<p>El punto azul que estamos estudiando es positivo, por tanto el bit de signo (S) vale 0.</p>" +
-      "<p>Como este punto se encuentra en la zona normalizada, el campo exponente (E) debe ser distinto de 0 (observar imagen de Introducción). " +
+      "<p>El punto azul que estamos estudiando (el derecho) es positivo, por tanto el bit de signo (S) vale 0.</p>" +
+      '<p>Como este punto se encuentra en la zona normalizada, el campo exponente (E) debe ser distinto de 0 (observar imagen de <a href="#introduccion">Introducción</a>). ' +
       "Como es el valor más pequeño, pondremos el campo exponente más pequeño que podamos (1)</p>" +
       "<p>La zona normalizada no impone restricciones de ningún tipo al campo mantisa (M), así que pondremos la M más pequeña que podamos (0).</p>" +
       "<p>Ya tenemos S, E y M, así que basta utilizar la fórmula de la zona normalizada y operar.</p>" +
@@ -108,10 +110,31 @@ systemForm.addEventListener("submit", function (e) {
         " es mayor que el punto azul (" +
         "2<sup>" +
         (exponent - excess) +
-        "</sup>), se encuentra en la zona normalizada.</p>";
+        "</sup>), se encuentra en la zona normalizada.</p>" +
+        "<h4>Cálculos</h4>" +
+        "<p>Sabiendo que " +
+        number +
+        " pertenece a la zona normalizada, podemos emplear su fórmula.</p>" +
+        '<div class="equation">' +
+        "<p>V(X) = " +
+        number +
+        " = 1,M &times 2<sup>E-" +
+        excess +
+        "</sup></p>" +
+        "</div>" +
+        "<p>Consideraremos como incógnitas X e Y.</p>" +
+        '<div class="equation">' +
+        "<p>V(X) = " +
+        number +
+        ' = <span class="blueXSquare">1,M<span class="x_item">x</span></span> &times 2<sup><span class="redYSquare">E-' +
+        excess +
+        '<span class="y_item">y</span></span></sup></p>' +
+        "</div>" +
+        "<p>Supongo X = 1,0.</p>" +
+        "";
     }
   } else {
-    console.log("Numero negativo");
+    console.log("Numero diferente");
   }
   document.body.innerHTML = document.body.innerHTML + html; //Añadimos al HTML todo lo escrito.
 });
