@@ -1,6 +1,8 @@
 let systemForm = document.getElementById("systemForm");
 
 systemForm.addEventListener("submit", function (e) {
+  let number = null; //Inicializamos a null el número.
+
   e.preventDefault(); //No va a ningún action, se queda en la web.
   var formData = new FormData(systemForm); //Recogemos los datos del formulario en formData.
 
@@ -10,6 +12,13 @@ systemForm.addEventListener("submit", function (e) {
     return;
   }
 
+  if (formData.get("number").indexOf("**") != -1) {
+    //Si contiene el operador exponente:
+    number = eval(formData.get("number")); //Evaluamos y realizamos las operaciones aritméticas pertinentes.
+  } else {
+    number = formData.get("number"); //No evaluamos ninguna expresión, simplemente transformamos la String a Number.
+  }
+
   //Prueba recorriendo el Object formData con el iterador entries(). Usar typeof para comprobar tipos.
   /*for (let pair of formData.entries()) {
     console.log(pair[0] + ": " + pair[1]);
@@ -17,7 +26,6 @@ systemForm.addEventListener("submit", function (e) {
 
   //Recogemos en variables los datos del formulario guardados en formData:
   let precisionMode = formData.get("precisionMode");
-  let number = formData.get("number");
   let sign = 0;
   let exponent = 0;
   let mantissa = 0;
@@ -117,7 +125,10 @@ function dataIsOk(formData) {
       isNaN(formData.get("number"))
   );*/
   //Si no hay seleccionado ningún modo de precisión o si el valor introducido no es un número (en tal caso el casting a Number dará NaN, Not a Number):
-  if (!formData.has("precisionMode") || isNaN(formData.get("number"))) {
+  if (
+    !formData.has("precisionMode") ||
+    isNaN(formData.get("number") && formData.get("number").indexOf("**") == -1)
+  ) {
     return false; //Los datos introducidos no son correctos.
   } else {
     return true; //Los datos introducidos sí son correctos.
