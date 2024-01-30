@@ -15,10 +15,10 @@ systemForm.addEventListener("submit", function (e) {
   if (formData.get("number").indexOf("**") != -1) {
     //Si contiene el operador exponente:
     number = eval(formData.get("number")); //Evaluamos y realizamos las operaciones aritméticas pertinentes.
-    console.log("Evalúo");
+    //console.log("Evalúo");
   } else {
     number = formData.get("number"); //No evaluamos ninguna expresión, simplemente transformamos la String a Number.
-    console.log("Transformo");
+    //console.log("Transformo");
   }
 
   //Prueba recorriendo el Object formData con el iterador entries(). Usar typeof para comprobar tipos.
@@ -36,6 +36,15 @@ systemForm.addEventListener("submit", function (e) {
   let y = 0;
   let x = 0;
   let roundedY = 0;
+  let previousMultiplicationOperand = 0;
+  let nextMultiplicationOperand = 0;
+  let operationsCounter = 0; //Cuando se realiza una operación en el bucle while encargado de calcular la mantisa (M), incrementa en uno.
+  //Variables que controlan la presentación del resultado:
+  let mantissaNumberBits =
+    precisionMode.localeCompare("simplePrecision") == 0 ? 23 : 52; //Si el modo elegido es simple precisión, el nº de bits de la mantisa es 23. Sino (si es doble precisión), es 52.
+  let exponentNumberBits =
+    precisionMode.localeCompare("simplePrecision") == 0 ? 8 : 11; //Si el modo elegido es simple precisión, el nº de bits del exponente es 8. Sino (si es doble precisión), es 11.
+  let exponentArray = Array.from({ length: exponentNumberBits }, () => false);
 
   //Escribimos lo que vamos a añadir al HTML:
   let html =
@@ -111,6 +120,10 @@ systemForm.addEventListener("submit", function (e) {
       //Realizamos los cálculos pertinentes para mostrarlos más adelante:
       y = Math.log2(number);
       roundedY = Math.floor(y); //Redondeamos la y' al entero menor más próximo posible.
+      x = number / 2 ** roundedY;
+      exponent = roundedY + excess;
+      previousMultiplicationOperand = x % 1; //Solo nos quedamos con la parte decimal de la x, es decir, con el resto de la divisón por 1.
+      nextMultiplicationOperand = 0;
 
       html +=
         "<p>Como " +
@@ -138,7 +151,7 @@ systemForm.addEventListener("submit", function (e) {
         excess +
         '<span class="y_item">y</span></span></sup></p>' +
         "</div>" +
-        "<p>Supongo X = 1,0. La única incógnita será y'.</p>" +
+        "<p>Supongo X = 1,0. La única incógnita será Y'.</p>" +
         '<div class="equation">' +
         "<p>" +
         number +
@@ -169,8 +182,65 @@ systemForm.addEventListener("submit", function (e) {
         '<div class="equation">' +
         "<p>V(X) = " +
         number +
-        " = x &times 2<sup></sup></p>" +
-        "</div>";
+        " = x &times 2<sup>" +
+        roundedY +
+        "</sup></p>" +
+        "</div>" +
+        '<div class="equation">' +
+        "<p>x = " +
+        number +
+        " &divide " +
+        2 ** roundedY +
+        "</p>" +
+        "</div>" +
+        '<div class="equation">' +
+        "<p>x = " +
+        x +
+        "</p>" +
+        "</div>" +
+        "<p>Sabiendo y podemos despejar el exponente (E).</p>" +
+        '<div class="equation">' +
+        "<p>y = E - " +
+        excess +
+        "</p>" +
+        "</div>" +
+        '<div class="equation">' +
+        "<p>" +
+        roundedY +
+        " = E - " +
+        excess +
+        "</p>" +
+        "</div>" +
+        '<div class="equation">' +
+        "<p>E = " +
+        exponent +
+        "</p>" +
+        "</div>" +
+        "<p>Nos falta hallar la mantisa (M). Esta se calcula cogiendo la parte decimal de la X, " +
+        "multiplicándola por dos hasta llegar a 1,00. Los bits, que van de mayor a menor peso, son coloreados.</p>";
+      //Mientras el resultado no sea 1,00 y mientras no hayamos pasado el nº de operaciones máximo:
+      while (
+        nextMultiplicationOperand != 1 &&
+        operationsCounter < mantissaNumberBits
+      ) {
+        nextMultiplicationOperand = previousMultiplicationOperand * 2; //Posible error, es muy pequeño así que no nos importa. Problemas de JS.
+        html +=
+          '<div class="equation"><p>' +
+          previousMultiplicationOperand +
+          " * 2 = " +
+          '<span class="orange">' +
+          div(nextMultiplicationOperand, 1) +
+          "</span>" +
+          (nextMultiplicationOperand % 1).toString().substring(1) + //Separamos parte decimal y parte binaria para colorear los decimales.
+          " : M<sub>" +
+          (mantissaNumberBits - operationsCounter) +
+          "</sub></p></div>";
+        previousMultiplicationOperand = nextMultiplicationOperand;
+        if (previousMultiplicationOperand >= 1) {
+          previousMultiplicationOperand -= 1;
+        }
+        operationsCounter++;
+      }
     }
   } else {
     console.log("Numero diferente");
@@ -195,4 +265,9 @@ function dataIsOk(formData) {
   } else {
     return true; //Los datos introducidos sí son correctos.
   }
+}
+
+//Realiza una división entera. Cortesía de https://stackoverflow.com/questions/4228356/how-to-perform-an-integer-division-and-separately-get-the-remainder-in-javascr.
+function div(x, y) {
+  return Math.trunc(x / y);
 }
