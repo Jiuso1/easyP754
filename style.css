@@ -154,3 +154,12 @@ sub {
 .orange {
   color: orange;
 }
+table {
+  margin: auto;
+  border: 0.2rem solid black;
+  margin-top: 1rem;
+  font-family: sans-serif;
+}
+table th sub {
+  font-size: 1rem;
+}

@@ -27,11 +27,12 @@ systemForm.addEventListener("submit", function (e) {
   }*/
 
   //Recogemos en variables los datos del formulario guardados en formData:
-  let precisionMode = formData.get("precisionMode");
+  const precisionMode = formData.get("precisionMode");
   let sign = 0;
   let exponent = 0;
   let mantissa = 0;
-  let excess = precisionMode.localeCompare("simplePrecision") == 0 ? 127 : 1023; //Si el modo elegido es simple precisión, el exceso es 127. Sino (si es doble precisión), el exceso es 1023.
+  const excess =
+    precisionMode.localeCompare("simplePrecision") == 0 ? 127 : 1023; //Si el modo elegido es simple precisión, el exceso es 127. Sino (si es doble precisión), el exceso es 1023.
   //Variables necesarias para los cálculos:
   let y = 0;
   let x = 0;
@@ -39,12 +40,14 @@ systemForm.addEventListener("submit", function (e) {
   let previousMultiplicationOperand = 0;
   let nextMultiplicationOperand = 0;
   let operationsCounter = 0; //Cuando se realiza una operación en el bucle while encargado de calcular la mantisa (M), incrementa en uno.
+  let mantissaBit = 0;
   //Variables que controlan la presentación del resultado:
-  let mantissaNumberBits =
+  const mantissaNumberBits =
     precisionMode.localeCompare("simplePrecision") == 0 ? 23 : 52; //Si el modo elegido es simple precisión, el nº de bits de la mantisa es 23. Sino (si es doble precisión), es 52.
-  let exponentNumberBits =
+  const exponentNumberBits =
     precisionMode.localeCompare("simplePrecision") == 0 ? 8 : 11; //Si el modo elegido es simple precisión, el nº de bits del exponente es 8. Sino (si es doble precisión), es 11.
-  let exponentArray = Array.from({ length: exponentNumberBits }, () => false);
+  let mantissaArray = Array.from({ length: mantissaNumberBits }, () => 0); //Creamos un array de bits para la mantisa, inicializado a 0 por defecto.
+  let exponentArray = null;
 
   //Escribimos lo que vamos a añadir al HTML:
   let html =
@@ -121,9 +124,6 @@ systemForm.addEventListener("submit", function (e) {
       y = Math.log2(number);
       roundedY = Math.floor(y); //Redondeamos la y' al entero menor más próximo posible.
       x = number / 2 ** roundedY;
-      exponent = roundedY + excess;
-      previousMultiplicationOperand = x % 1; //Solo nos quedamos con la parte decimal de la x, es decir, con el resto de la divisón por 1.
-      nextMultiplicationOperand = 0;
 
       html +=
         "<p>Como " +
@@ -131,7 +131,14 @@ systemForm.addEventListener("submit", function (e) {
         " es mayor que el punto azul (" +
         "2<sup>" +
         (exponent - excess) +
-        "</sup>), se encuentra en la zona normalizada.</p>" +
+        "</sup>), se encuentra en la zona normalizada.</p>";
+
+      exponent = roundedY + excess;
+      previousMultiplicationOperand = x % 1; //Solo nos quedamos con la parte decimal de la x, es decir, con el resto de la divisón por 1.
+      nextMultiplicationOperand = 0;
+      exponentArray = exponent.toString(2); //exponentArray almacena exponent en forma binaria, en una cadena de texto.
+
+      html +=
         "<h4>Cálculos</h4>" +
         "<p>Sabiendo que " +
         number +
@@ -224,24 +231,52 @@ systemForm.addEventListener("submit", function (e) {
         operationsCounter < mantissaNumberBits
       ) {
         nextMultiplicationOperand = previousMultiplicationOperand * 2; //Posible error, es muy pequeño así que no nos importa. Problemas de JS.
+        mantissaBit = div(nextMultiplicationOperand, 1);
         html +=
           '<div class="equation"><p>' +
           previousMultiplicationOperand +
           " * 2 = " +
           '<span class="orange">' +
-          div(nextMultiplicationOperand, 1) +
+          mantissaBit +
           "</span>" +
           (nextMultiplicationOperand % 1).toString().substring(1) + //Separamos parte decimal y parte binaria para colorear los decimales.
           " : M<sub>" +
-          (mantissaNumberBits - operationsCounter) +
+          (mantissaNumberBits - operationsCounter - 1) +
           "</sub></p></div>";
         previousMultiplicationOperand = nextMultiplicationOperand;
         if (previousMultiplicationOperand >= 1) {
           previousMultiplicationOperand -= 1;
+          mantissaArray[mantissaNumberBits - operationsCounter - 1] = 1;
         }
         operationsCounter++;
       }
     }
+    //Por último, mostramos el resultado recorriendo los arrays de bits que hemos calculado anteriormente:
+    html +=
+      "<h4>Resultado</h4>" +
+      "<p>Solo falta mostrar el exponente (E) en base 2, y mostrar el conjunto, quedando así...</p>" +
+      "<table><tr><th>S</th>";
+
+    //Hacemos una "extensión de signo". Necesitamos forzosamente exponentNumberBits, así que rellenamos con 0s si nos faltan bits.
+    while (exponentArray.length < exponentNumberBits) {
+      exponentArray = "0" + exponentArray;
+    }
+
+    for (i = exponentNumberBits - 1; i >= 0; i--) {
+      html += "<th>E<sub>" + i + "</sub></th>";
+    }
+    for (i = mantissaNumberBits - 1; i >= 0; i--) {
+      html += "<th>M<sub>" + i + "</sub></th>";
+    }
+    html += "</tr>" + "<tr><th>" + sign + "</th>";
+    console.log(exponentArray);
+    for (i = 0; i < exponentNumberBits; i++) {
+      html += "<th>" + exponentArray.charAt(i) + "</th>";
+    }
+    for (i = mantissaNumberBits - 1; i >= 0; i--) {
+      html += "<th>" + mantissaArray[i] + "</th>";
+    }
+    html += "</tr>" + "</table>";
   } else {
     console.log("Numero diferente");
   }
