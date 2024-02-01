@@ -122,7 +122,7 @@ systemForm.addEventListener("submit", function (e) {
       //Si el número introducido por teclado es mayor que el punto azul, este se encuentra en la zona normalizada.
       //Realizamos los cálculos pertinentes para mostrarlos más adelante:
       y = Math.log2(number);
-      roundedY = Math.floor(y); //Redondeamos la y' al entero menor más próximo posible.
+      roundedY = Math.floor(y); //Redondeamos la Y' al entero menor más próximo posible.
       x = number / 2 ** roundedY;
 
       html +=
@@ -134,7 +134,7 @@ systemForm.addEventListener("submit", function (e) {
         "</sup>), se encuentra en la zona normalizada.</p>";
 
       exponent = roundedY + excess;
-      previousMultiplicationOperand = x % 1; //Solo nos quedamos con la parte decimal de la x, es decir, con el resto de la divisón por 1.
+      previousMultiplicationOperand = x % 1; //Solo nos quedamos con la parte decimal de la X, es decir, con el resto de la divisón por 1.
       nextMultiplicationOperand = 0;
       exponentArray = exponent.toString(2); //exponentArray almacena exponent en forma binaria, en una cadena de texto.
 
@@ -150,7 +150,7 @@ systemForm.addEventListener("submit", function (e) {
         excess +
         "</sup></p>" +
         "</div>" +
-        "<p>Consideraremos como incógnitas X e Y.</p>" +
+        '<p>Consideraremos como incógnitas <span class="bold">X</span> e <span class="bold">Y</span>.</p>' +
         '<div class="equation">' +
         "<p>V(X) = " +
         number +
@@ -158,7 +158,7 @@ systemForm.addEventListener("submit", function (e) {
         excess +
         '<span class="y_item">y</span></span></sup></p>' +
         "</div>" +
-        "<p>Supongo X = 1,0. La única incógnita será Y'.</p>" +
+        '<p>Supongo <span class="bold">X</span> = 1,0. La única incógnita será <span class="bold">Y\'</span>.</p>' +
         '<div class="equation">' +
         "<p>" +
         number +
@@ -185,7 +185,25 @@ systemForm.addEventListener("submit", function (e) {
         roundedY +
         "</p>" +
         "</div>" +
-        "<p>Sustituimos en la ecuación con recuadros de colores.</p>" +
+        '<p>Sabiendo <span class="bold">Y</span> podemos despejar el exponente (E).</p>' +
+        '<div class="equation">' +
+        "<p>y = E - " +
+        excess +
+        "</p>" +
+        "</div>" +
+        '<div class="equation">' +
+        "<p>" +
+        roundedY +
+        " = E - " +
+        excess +
+        "</p>" +
+        "</div>" +
+        '<div class="equation">' +
+        "<p>E = " +
+        exponent +
+        "</p>" +
+        "</div>" +
+        '<p>Sustituimos <span class="bold">Y</span> en la ecuación con recuadros de colores, dejando <span class="bold">X</span> como incógnita.</p>' +
         '<div class="equation">' +
         "<p>V(X) = " +
         number +
@@ -205,25 +223,7 @@ systemForm.addEventListener("submit", function (e) {
         x +
         "</p>" +
         "</div>" +
-        "<p>Sabiendo y podemos despejar el exponente (E).</p>" +
-        '<div class="equation">' +
-        "<p>y = E - " +
-        excess +
-        "</p>" +
-        "</div>" +
-        '<div class="equation">' +
-        "<p>" +
-        roundedY +
-        " = E - " +
-        excess +
-        "</p>" +
-        "</div>" +
-        '<div class="equation">' +
-        "<p>E = " +
-        exponent +
-        "</p>" +
-        "</div>" +
-        "<p>Nos falta hallar la mantisa (M). Esta se calcula cogiendo la parte decimal de la X, " +
+        '<p>Nos falta hallar la mantisa (M). Esta se calcula cogiendo la parte decimal de la <span class="bold">X</span>, ' +
         "multiplicándola por dos hasta llegar a 1,00. Los bits, que van de mayor a menor peso, son coloreados.</p>";
       //Mientras el resultado no sea 1,00 y mientras no hayamos pasado el nº de operaciones máximo:
       while (
@@ -240,9 +240,7 @@ systemForm.addEventListener("submit", function (e) {
           mantissaBit +
           "</span>" +
           (nextMultiplicationOperand % 1).toString().substring(1) + //Separamos parte decimal y parte binaria para colorear los decimales.
-          " : M<sub>" +
-          (mantissaNumberBits - operationsCounter - 1) +
-          "</sub></p></div>";
+          "</p></div>";
         previousMultiplicationOperand = nextMultiplicationOperand;
         if (previousMultiplicationOperand >= 1) {
           previousMultiplicationOperand -= 1;
@@ -252,22 +250,23 @@ systemForm.addEventListener("submit", function (e) {
       }
     }
     //Por último, mostramos el resultado recorriendo los arrays de bits que hemos calculado anteriormente:
-    html +=
-      "<h4>Resultado</h4>" +
-      "<p>Solo falta mostrar el exponente (E) en base 2, y mostrar el conjunto, quedando así...</p>" +
-      "<table><tr><th>S</th>";
+    html += "<h4>Resultado</h4>" + "<table><tr><th>S</th>";
 
     //Hacemos una "extensión de signo". Necesitamos forzosamente exponentNumberBits, así que rellenamos con 0s si nos faltan bits.
     while (exponentArray.length < exponentNumberBits) {
       exponentArray = "0" + exponentArray;
     }
 
+    //Dibujamos los headers del resultado:
     for (i = exponentNumberBits - 1; i >= 0; i--) {
       html += "<th>E<sub>" + i + "</sub></th>";
     }
-    for (i = mantissaNumberBits - 1; i >= 0; i--) {
+
+    for (i = -1; i > -mantissaNumberBits - 1; i--) {
       html += "<th>M<sub>" + i + "</sub></th>";
+      console.log("xd");
     }
+
     html += "</tr>" + "<tr><th>" + sign + "</th>";
     console.log(exponentArray);
     for (i = 0; i < exponentNumberBits; i++) {
