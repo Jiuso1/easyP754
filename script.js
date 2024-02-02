@@ -100,14 +100,14 @@ systemForm.addEventListener("submit", function (e) {
       "<p>La zona normalizada no impone restricciones de ningún tipo al campo mantisa (M), así que pondremos la M más pequeña que podamos (0).</p>" +
       "<p>Ya tenemos S, E y M, así que basta utilizar la fórmula de la zona normalizada y operar.</p>" +
       '<div class="equation">' +
-      "<p>V(X) = (-1)<sup>S</sup> &times 1,M &times 2<sup>E-EXCESO</sup></p>" +
+      "<p>V(X) = (-1)<sup>S</sup> &times; 1,M &times; 2<sup>E-EXCESO</sup></p>" +
       "</div>" +
       '<div class="equation">' +
       "<p>V(X) = (-1)<sup>" +
       sign +
-      "</sup> &times 1," +
+      "</sup> &times; 1," +
       mantissa +
-      " &times 2<sup>" +
+      " &times; 2<sup>" +
       exponent +
       "-" +
       excess +
@@ -146,23 +146,29 @@ systemForm.addEventListener("submit", function (e) {
         '<div class="equation">' +
         "<p>V(X) = " +
         number +
-        " = 1,M &times 2<sup>E-" +
+        " = 1,M &times; 2<sup>E-" +
         excess +
         "</sup></p>" +
         "</div>" +
-        '<p>Consideraremos como incógnitas <span class="bold">X</span> e <span class="bold">Y</span>.</p>' +
+        '<p>Consideraremos el siguiente sistema de tres ecuaciones con incógnitas <span class="bold">X</span> e <span class="bold">Y</span>.</p>' +
         '<div class="equation">' +
         "<p>V(X) = " +
         number +
-        ' = <span class="blueXSquare">1,M<span class="x_item">x</span></span> &times 2<sup><span class="redYSquare">E-' +
+        ' = <span class="blueXSquare">1,M<span class="x_item">x</span></span> &times; 2<sup><span class="redYSquare">E-' +
         excess +
         '<span class="y_item">y</span></span></sup></p>' +
+        "</div>" +
+        '<div class="equation">' +
+        "<p>y &isin; &integers;</p>" +
+        "</div>" +
+        '<div class="equation">' +
+        "<p>1 &le; x &lt; 2</p>" +
         "</div>" +
         '<p>Supongo <span class="bold">X</span> = 1,0. La única incógnita será <span class="bold">Y\'</span>.</p>' +
         '<div class="equation">' +
         "<p>" +
         number +
-        " = 1,0 &times 2<sup>y'</sup></p>" +
+        " = 1,0 &times; 2<sup>y'</sup></p>" +
         "</div>" +
         '<div class="equation">' +
         "<p>" +
@@ -207,14 +213,14 @@ systemForm.addEventListener("submit", function (e) {
         '<div class="equation">' +
         "<p>V(X) = " +
         number +
-        " = x &times 2<sup>" +
+        " = x &times; 2<sup>" +
         roundedY +
         "</sup></p>" +
         "</div>" +
         '<div class="equation">' +
         "<p>x = " +
         number +
-        " &divide " +
+        " &divide; " +
         2 ** roundedY +
         "</p>" +
         "</div>" +
@@ -235,7 +241,7 @@ systemForm.addEventListener("submit", function (e) {
         html +=
           '<div class="equation"><p>' +
           previousMultiplicationOperand +
-          " * 2 = " +
+          " &times; 2 = " +
           '<span class="orange">' +
           mantissaBit +
           "</span>" +
@@ -264,7 +270,6 @@ systemForm.addEventListener("submit", function (e) {
 
     for (i = -1; i > -mantissaNumberBits - 1; i--) {
       html += "<th>M<sub>" + i + "</sub></th>";
-      console.log("xd");
     }
 
     html += "</tr>" + "<tr><th>" + sign + "</th>";
