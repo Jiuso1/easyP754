@@ -98,7 +98,7 @@ systemForm.addEventListener("submit", function (e) {
       '<p>Como este punto se encuentra en la zona normalizada, el campo exponente (E) debe ser distinto de 0 (observar imagen de <a href="#introduccion">Introducción</a>). ' +
       "Como es el valor más pequeño, pondremos el campo exponente más pequeño que podamos (1)</p>" +
       "<p>La zona normalizada no impone restricciones de ningún tipo al campo mantisa (M), así que pondremos la M más pequeña que podamos (0).</p>" +
-      "<p>Ya tenemos S, E y M, así que basta utilizar la fórmula de la zona normalizada y operar.</p>" +
+      "<p>Ya tenemos S, E y M, así que basta con utilizar la fórmula de la zona normalizada y operar.</p>" +
       '<div class="equation">' +
       "<p>V(X) = (-1)<sup>S</sup> &times; 1,M &times; 2<sup>E-EXCESO</sup></p>" +
       "</div>" +
@@ -118,7 +118,7 @@ systemForm.addEventListener("submit", function (e) {
       (exponent - excess) +
       "</sup></p>" +
       "</div>";
-    if (number > Math.pow(2, exponent - excess)) {
+    if (number >= Math.pow(2, exponent - excess)) {
       //Si el número introducido por teclado es mayor que el punto azul, este se encuentra en la zona normalizada.
       //Realizamos los cálculos pertinentes para mostrarlos más adelante:
       y = Math.log2(number);
@@ -128,7 +128,7 @@ systemForm.addEventListener("submit", function (e) {
       html +=
         "<p>Como " +
         number +
-        " es mayor que el punto azul (" +
+        " es mayor o igual que el punto azul (" +
         "2<sup>" +
         (exponent - excess) +
         "</sup>), se encuentra en la zona normalizada.</p>";
@@ -254,6 +254,125 @@ systemForm.addEventListener("submit", function (e) {
         }
         operationsCounter++;
       }
+      //Por último, mostramos el resultado recorriendo los arrays de bits que hemos calculado anteriormente:
+      html += "<h4>Resultado</h4>" + "<table><tr><th>S</th>";
+
+      //Hacemos una "extensión de signo". Necesitamos forzosamente exponentNumberBits, así que rellenamos con 0s si nos faltan bits.
+      while (exponentArray.length < exponentNumberBits) {
+        exponentArray = "0" + exponentArray;
+      }
+
+      //Dibujamos los headers del resultado:
+      for (i = exponentNumberBits - 1; i >= 0; i--) {
+        html += "<th>E<sub>" + i + "</sub></th>";
+      }
+
+      for (i = -1; i > -mantissaNumberBits - 1; i--) {
+        html += "<th>M<sub>" + i + "</sub></th>";
+      }
+
+      html += "</tr>" + "<tr><th>" + sign + "</th>";
+      //console.log(exponentArray);
+      for (i = 0; i < exponentNumberBits; i++) {
+        html += "<th>" + exponentArray.charAt(i) + "</th>";
+      }
+      for (i = mantissaNumberBits - 1; i >= 0; i--) {
+        html += "<th>" + mantissaArray[i] + "</th>";
+      }
+      html += "</tr>" + "</table>";
+    } else {
+      x = number / 2 ** (-excess + 1);
+      exponent = 0; //En la zona desnormalizada, E = 0.
+      previousMultiplicationOperand = x % 1; //Solo nos quedamos con la parte decimal de la X, es decir, con el resto de la divisón por 1.
+      nextMultiplicationOperand = 0;
+      exponentArray = exponent.toString(2); //exponentArray almacena exponent en forma binaria, en una cadena de texto.
+
+      console.log("Numero menor al punto azul positivo");
+      html +=
+        "<p>Como " +
+        number +
+        " es menor que el punto azul (" +
+        "2<sup>" +
+        (exponent - excess) +
+        "</sup>), se encuentra en la zona desnormalizada.</p>";
+
+      html +=
+        "<h4>Cálculos</h4>" +
+        "<p>Sabiendo que " +
+        number +
+        " pertenece a la zona desnormalizada, podemos emplear su fórmula.</p>" +
+        '<div class="equation">' +
+        "<p>V(X) = " +
+        number +
+        " = 0,M &times; 2<sup>-" +
+        excess +
+        " + 1" +
+        "</sup></p>" +
+        "</div>" +
+        "<p>Desarrollamos el exponente.</p>" +
+        '<div class="equation">' +
+        "<p>V(X) = " +
+        number +
+        " = 0,M &times; 2<sup>" +
+        (-excess + 1) +
+        "</sup></p>" +
+        "</div>" +
+        '<p>Consideraremos el siguiente sistema de dos ecuaciones con incógnita <span class="bold">X</span>.</p>' +
+        '<div class="equation">' +
+        "<p>V(X) = " +
+        number +
+        ' = <span class="blueXSquare">0,M<span class="x_item">x</span></span> &times; 2<sup>  ' +
+        (-excess + 1) +
+        "</sup></p>" +
+        "</div>" +
+        '<div class="equation">' +
+        "<p>0 &le; x &lt; 1</p>" +
+        "</div>" +
+        '<p>Resolvemos la ecuación que tiene como incógnita <span class="bold">X</span>.' +
+        '<div class="equation">' +
+        "<p>V(X) = " +
+        number +
+        " = x &times; 2<sup>" +
+        (-excess + 1) +
+        "</sup></p>" +
+        "</div>" +
+        '<div class="equation">' +
+        "<p>x = " +
+        number +
+        " &divide; " +
+        2 ** (-excess + 1) +
+        "</p>" +
+        "</div>" +
+        '<div class="equation">' +
+        "<p>x = " +
+        x +
+        "</p>" +
+        "</div>" +
+        '<p>Nos falta hallar la mantisa (M). Esta se calcula cogiendo la parte decimal de la <span class="bold">X</span>, ' +
+        "multiplicándola por dos hasta llegar a 1,00. Los bits, que van de mayor a menor peso, son coloreados.</p>";
+    }
+    //Mientras el resultado no sea 1,00 y mientras no hayamos pasado el nº de operaciones máximo:
+    while (
+      nextMultiplicationOperand != 1 &&
+      operationsCounter < mantissaNumberBits
+    ) {
+      nextMultiplicationOperand = previousMultiplicationOperand * 2; //Posible error, es muy pequeño así que no nos importa. Problemas de JS.
+      mantissaBit = div(nextMultiplicationOperand, 1);
+      html +=
+        '<div class="equation"><p>' +
+        previousMultiplicationOperand +
+        " &times; 2 = " +
+        '<span class="orange">' +
+        mantissaBit +
+        "</span>" +
+        (nextMultiplicationOperand % 1).toString().substring(1) + //Separamos parte decimal y parte binaria para colorear los decimales.
+        "</p></div>";
+      previousMultiplicationOperand = nextMultiplicationOperand;
+      if (previousMultiplicationOperand >= 1) {
+        previousMultiplicationOperand -= 1;
+        mantissaArray[mantissaNumberBits - operationsCounter - 1] = 1;
+      }
+      operationsCounter++;
     }
     //Por último, mostramos el resultado recorriendo los arrays de bits que hemos calculado anteriormente:
     html += "<h4>Resultado</h4>" + "<table><tr><th>S</th>";
@@ -273,7 +392,7 @@ systemForm.addEventListener("submit", function (e) {
     }
 
     html += "</tr>" + "<tr><th>" + sign + "</th>";
-    console.log(exponentArray);
+    //console.log(exponentArray);
     for (i = 0; i < exponentNumberBits; i++) {
       html += "<th>" + exponentArray.charAt(i) + "</th>";
     }
@@ -282,7 +401,7 @@ systemForm.addEventListener("submit", function (e) {
     }
     html += "</tr>" + "</table>";
   } else {
-    console.log("Numero diferente");
+    console.log("Numero negativo");
   }
   document.body.innerHTML = document.body.innerHTML + html; //Añadimos al HTML todo lo escrito.
 });
