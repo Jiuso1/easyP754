@@ -71,7 +71,7 @@ systemForm.addEventListener("submit", function (e) {
     "<dt>E (campo exponente)</dt>" +
     "<dd>Emplea 8 bits en el caso de simple precisión, y 11 bits en el caso de doble precisión.</dd>" +
     "<dt>M (campo mantisa)</dt>" +
-    "<dd>Emplea 23 bits en el caso de simple precisión, y 52 bits en el caso de doblep precisión.</dd>" +
+    "<dd>Emplea 23 bits en el caso de simple precisión, y 52 bits en el caso de doble precisión.</dd>" +
     "</dl>" +
     "</div>" +
     "<p>La combinación de estos tres términos representa un número, y nosotros vamos a calcular estos para representar el número decimal dado.</p>" +
@@ -93,7 +93,7 @@ systemForm.addEventListener("submit", function (e) {
     html +=
       "<p>" +
       number +
-      " es positivo, compararemos con el punto azul de la zona desnormalizada positiva. Es decir, con el número más pequeño de esa zona.</p>" +
+      " es positivo, compararemos con el punto azul de la zona normalizada positiva. Es decir, con el número más pequeño de esa zona.</p>" +
       "<p>El punto azul que estamos estudiando (el derecho) es positivo, por tanto el bit de signo (S) vale 0.</p>" +
       '<p>Como este punto se encuentra en la zona normalizada, el campo exponente (E) debe ser distinto de 0 (observar imagen de <a href="#introduccion">Introducción</a>). ' +
       "Como es el valor más pequeño, pondremos el campo exponente más pequeño que podamos (1)</p>" +
@@ -254,32 +254,6 @@ systemForm.addEventListener("submit", function (e) {
         }
         operationsCounter++;
       }
-      //Por último, mostramos el resultado recorriendo los arrays de bits que hemos calculado anteriormente:
-      html += "<h4>Resultado</h4>" + "<table><tr><th>S</th>";
-
-      //Hacemos una "extensión de signo". Necesitamos forzosamente exponentNumberBits, así que rellenamos con 0s si nos faltan bits.
-      while (exponentArray.length < exponentNumberBits) {
-        exponentArray = "0" + exponentArray;
-      }
-
-      //Dibujamos los headers del resultado:
-      for (i = exponentNumberBits - 1; i >= 0; i--) {
-        html += "<th>E<sub>" + i + "</sub></th>";
-      }
-
-      for (i = -1; i > -mantissaNumberBits - 1; i--) {
-        html += "<th>M<sub>" + i + "</sub></th>";
-      }
-
-      html += "</tr>" + "<tr><th>" + sign + "</th>";
-      //console.log(exponentArray);
-      for (i = 0; i < exponentNumberBits; i++) {
-        html += "<th>" + exponentArray.charAt(i) + "</th>";
-      }
-      for (i = mantissaNumberBits - 1; i >= 0; i--) {
-        html += "<th>" + mantissaArray[i] + "</th>";
-      }
-      html += "</tr>" + "</table>";
     } else {
       x = number / 2 ** (-excess + 1);
       exponent = 0; //En la zona desnormalizada, E = 0.
@@ -374,6 +348,7 @@ systemForm.addEventListener("submit", function (e) {
       }
       operationsCounter++;
     }
+
     //Por último, mostramos el resultado recorriendo los arrays de bits que hemos calculado anteriormente:
     html += "<h4>Resultado</h4>" + "<table><tr><th>S</th>";
 
