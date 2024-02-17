@@ -1,3 +1,5 @@
+//console.log((0.2 * 10 + 0.1 * 10) / 10);
+
 let systemForm = document.getElementById("systemForm");
 
 systemForm.addEventListener("submit", function (e) {
@@ -134,7 +136,7 @@ systemForm.addEventListener("submit", function (e) {
         "</sup>), se encuentra en la zona normalizada.</p>";
 
       exponent = roundedY + excess;
-      previousMultiplicationOperand = x % 1; //Solo nos quedamos con la parte decimal de la X, es decir, con el resto de la divisón por 1.
+      previousMultiplicationOperand = decimals(x); //Solo nos quedamos con la parte decimal de la x.
       nextMultiplicationOperand = 0;
       exponentArray = exponent.toString(2); //exponentArray almacena exponent en forma binaria, en una cadena de texto.
 
@@ -325,12 +327,13 @@ systemForm.addEventListener("submit", function (e) {
         '<p>Nos falta hallar la mantisa (M). Esta se calcula cogiendo la parte decimal de la <span class="bold">X</span>, ' +
         "multiplicándola por dos hasta llegar a 1,00. Los bits, que van de mayor a menor peso, son coloreados.</p>";
     }
+    console.log(decimals(1.33278));
     //Mientras el resultado no sea 1,00 y mientras no hayamos pasado el nº de operaciones máximo:
     while (
       nextMultiplicationOperand != 1 &&
       operationsCounter < mantissaNumberBits
     ) {
-      nextMultiplicationOperand = previousMultiplicationOperand * 2; //Posible error, es muy pequeño así que no nos importa. Problemas de JS.
+      nextMultiplicationOperand = previousMultiplicationOperand * 2; //Margen de error a corregir, PENDIENTE.
       mantissaBit = div(nextMultiplicationOperand, 1);
       html +=
         '<div class="equation"><p>' +
@@ -403,4 +406,15 @@ function dataIsOk(formData) {
 //Realiza una división entera. Cortesía de https://stackoverflow.com/questions/4228356/how-to-perform-an-integer-division-and-separately-get-the-remainder-in-javascr.
 function div(x, y) {
   return Math.trunc(x / y);
+}
+
+//Devuelve un Number con los decimales del parámetro x.
+function decimals(x) {
+  let stringDecimals = "";
+  let stringNumber = x.toString(); //Convertimos el Number recibido a String.
+
+  stringDecimals = stringNumber.split(".")[1]; //Para entender esto, consultar https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split.
+  stringDecimals = "0." + stringDecimals; //Le concatenamos '0.', para convertirlo a Number posteriormente.
+
+  return Number(stringDecimals); //Convertimos la String a Number y lo retornamos.
 }
