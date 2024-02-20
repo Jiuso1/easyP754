@@ -240,8 +240,6 @@ systemForm.addEventListener("submit", function (e) {
           previousMultiplicationOperand,
           2
         ); //Multiplicamos por dos el operando previo.
-        console.log(previousMultiplicationOperand.valueOf() + " * 2 = ");
-        console.log(nextMultiplicationOperand.valueOf());
         mantissaBit = div(nextMultiplicationOperand, 1); //Realizamos una división entera de 1 al nextMultiplicationOperand. nextMultiplicationOperando pertenece a [0,2).
         html +=
           '<div class="equation"><p>' +
@@ -250,7 +248,8 @@ systemForm.addEventListener("submit", function (e) {
           '<span class="orange">' +
           mantissaBit +
           "</span>" +
-          (nextMultiplicationOperand % 1).toString().substring(1) + //Separamos parte decimal y parte binaria para colorear los decimales.
+          "." +
+          decimalsToString(decimals(nextMultiplicationOperand)) + //Separamos parte decimal y parte binaria para colorear los decimales.
           "</p></div>";
         previousMultiplicationOperand = nextMultiplicationOperand;
         if (previousMultiplicationOperand >= 1) {
@@ -347,7 +346,8 @@ systemForm.addEventListener("submit", function (e) {
         '<span class="orange">' +
         mantissaBit +
         "</span>" +
-        (nextMultiplicationOperand % 1).toString().substring(1) + //Separamos parte decimal y parte binaria para colorear los decimales.
+        "." +
+        decimalsToString(decimals(nextMultiplicationOperand)) + //Separamos parte decimal y parte binaria para colorear los decimales. + //Separamos parte decimal y parte binaria para colorear los decimales.
         "</p></div>";
       previousMultiplicationOperand = nextMultiplicationOperand; //Aquí es donde hay problemas, REVISAR.
       if (previousMultiplicationOperand >= 1) {
@@ -409,19 +409,35 @@ function div(x, y) {
   return Decimal.trunc(Decimal.div(x, y));
 }
 
-//Devuelve un Number con los decimales del parámetro x.
+//Devuelve un Decimal con los decimales del parámetro x.
 function decimals(x) {
   let stringDecimals = "";
-  let stringNumber = x.toString(); //Convertimos el Number recibido a String.
+  let stringNumber = x.toString(); //Convertimos el Decimal recibido a String.
 
   stringDecimals = stringNumber.split(".")[1]; //Para entender esto, consultar https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split.
-  stringDecimals = "0." + stringDecimals; //Le concatenamos '0.', para convertirlo a Number posteriormente.
+  if (stringDecimals === undefined) {
+    //Si no tiene decimales:
+    stringDecimals = "0";
+  } else {
+    //Si sí tiene decimales:
+    stringDecimals = "0." + stringDecimals; //Le concatenamos '0.', para convertirlo a Decimal posteriormente.
+  }
 
-  return Decimal(stringDecimals); //Convertimos la String a Number y lo retornamos. Aquí está el fallo, por revisar.
+  return Decimal(stringDecimals); //Convertimos la String a Decimal y lo retornamos.
 }
 
 //Devuelve un entero: el número de decimales de un Number pasado por el parámetro x.
 function numberOfDecimals(x) {
   let stringNumber = x.toString(); //Convertimos el Number recibido a String.
   return stringNumber.split(".")[1].length; //Devuelve el número de caracteres de la cadena de después del '.'.
+}
+
+//Devuelve una string: los decimales almacenados en el decimal pasado por parámetro.
+function decimalsToString(decimals) {
+  let stringDecimals = decimals.toString().split(".")[1]; //Convertimos el Decimal con decimales recibido a String.
+  if (stringDecimals === undefined) {
+    //Si no había decimales (por ejemplo, al recibir un Decimal que después del punto tiene 0. Ejemplos: 1.0, 32.0...):
+    stringDecimals = "0";
+  }
+  return stringDecimals;
 }
