@@ -1,4 +1,7 @@
 //console.log((0.2 * 10 + 0.1 * 10) / 10);
+//console.log(numberOfDecimals(3.569329));
+//console.log((0.2 * 10 + 0.1 * 10) / 10);
+//console.log("div: " + div(7, 2));
 
 let systemForm = document.getElementById("systemForm");
 
@@ -23,11 +26,6 @@ systemForm.addEventListener("submit", function (e) {
     //console.log("Transformo");
   }
 
-  //Prueba recorriendo el Object formData con el iterador entries(). Usar typeof para comprobar tipos.
-  /*for (let pair of formData.entries()) {
-    console.log(pair[0] + ": " + pair[1]);
-  }*/
-
   //Recogemos en variables los datos del formulario guardados en formData:
   const precisionMode = formData.get("precisionMode");
   let sign = 0;
@@ -39,8 +37,8 @@ systemForm.addEventListener("submit", function (e) {
   let y = 0;
   let x = 0;
   let roundedY = 0;
-  let previousMultiplicationOperand = 0;
-  let nextMultiplicationOperand = 0;
+  let previousMultiplicationOperand = new Decimal(0);
+  let nextMultiplicationOperand = new Decimal(0);
   let operationsCounter = 0; //Cuando se realiza una operación en el bucle while encargado de calcular la mantisa (M), incrementa en uno.
   let mantissaBit = 0;
   //Variables que controlan la presentación del resultado:
@@ -136,8 +134,8 @@ systemForm.addEventListener("submit", function (e) {
         "</sup>), se encuentra en la zona normalizada.</p>";
 
       exponent = roundedY + excess;
-      previousMultiplicationOperand = decimals(x); //Solo nos quedamos con la parte decimal de la x.
-      nextMultiplicationOperand = 0;
+      previousMultiplicationOperand = decimals(x); //Solo nos quedamos con la parte decimal de la x. Falla decimals, POR REVISAR.
+      nextMultiplicationOperand = new Decimal(0);
       exponentArray = exponent.toString(2); //exponentArray almacena exponent en forma binaria, en una cadena de texto.
 
       html +=
@@ -238,8 +236,13 @@ systemForm.addEventListener("submit", function (e) {
         nextMultiplicationOperand != 1 &&
         operationsCounter < mantissaNumberBits
       ) {
-        nextMultiplicationOperand = previousMultiplicationOperand * 2; //Posible error, es muy pequeño así que no nos importa. Problemas de JS.
-        mantissaBit = div(nextMultiplicationOperand, 1);
+        nextMultiplicationOperand = Decimal.mul(
+          previousMultiplicationOperand,
+          2
+        ); //Multiplicamos por dos el operando previo.
+        console.log(previousMultiplicationOperand.valueOf() + " * 2 = ");
+        console.log(nextMultiplicationOperand.valueOf());
+        mantissaBit = div(nextMultiplicationOperand, 1); //Realizamos una división entera de 1 al nextMultiplicationOperand. nextMultiplicationOperando pertenece a [0,2).
         html +=
           '<div class="equation"><p>' +
           previousMultiplicationOperand +
@@ -251,7 +254,10 @@ systemForm.addEventListener("submit", function (e) {
           "</p></div>";
         previousMultiplicationOperand = nextMultiplicationOperand;
         if (previousMultiplicationOperand >= 1) {
-          previousMultiplicationOperand -= 1;
+          previousMultiplicationOperand = Decimal.sub(
+            previousMultiplicationOperand,
+            1
+          );
           mantissaArray[mantissaNumberBits - operationsCounter - 1] = 1;
         }
         operationsCounter++;
@@ -259,8 +265,8 @@ systemForm.addEventListener("submit", function (e) {
     } else {
       x = number / 2 ** (-excess + 1);
       exponent = 0; //En la zona desnormalizada, E = 0.
-      previousMultiplicationOperand = x % 1; //Solo nos quedamos con la parte decimal de la X, es decir, con el resto de la divisón por 1.
-      nextMultiplicationOperand = 0;
+      previousMultiplicationOperand = decimals(x); //Solo nos quedamos con la parte decimal de la X.
+      nextMultiplicationOperand = new Decimal(0);
       exponentArray = exponent.toString(2); //exponentArray almacena exponent en forma binaria, en una cadena de texto.
 
       console.log("Numero menor al punto azul positivo");
@@ -327,13 +333,12 @@ systemForm.addEventListener("submit", function (e) {
         '<p>Nos falta hallar la mantisa (M). Esta se calcula cogiendo la parte decimal de la <span class="bold">X</span>, ' +
         "multiplicándola por dos hasta llegar a 1,00. Los bits, que van de mayor a menor peso, son coloreados.</p>";
     }
-    console.log(decimals(1.33278));
     //Mientras el resultado no sea 1,00 y mientras no hayamos pasado el nº de operaciones máximo:
     while (
       nextMultiplicationOperand != 1 &&
       operationsCounter < mantissaNumberBits
     ) {
-      nextMultiplicationOperand = previousMultiplicationOperand * 2; //Margen de error a corregir, PENDIENTE.
+      nextMultiplicationOperand = Decimal.mul(previousMultiplicationOperand, 2); //Margen de error a corregir, PENDIENTE.
       mantissaBit = div(nextMultiplicationOperand, 1);
       html +=
         '<div class="equation"><p>' +
@@ -344,9 +349,12 @@ systemForm.addEventListener("submit", function (e) {
         "</span>" +
         (nextMultiplicationOperand % 1).toString().substring(1) + //Separamos parte decimal y parte binaria para colorear los decimales.
         "</p></div>";
-      previousMultiplicationOperand = nextMultiplicationOperand;
+      previousMultiplicationOperand = nextMultiplicationOperand; //Aquí es donde hay problemas, REVISAR.
       if (previousMultiplicationOperand >= 1) {
-        previousMultiplicationOperand -= 1;
+        previousMultiplicationOperand = Decimal.sub(
+          previousMultiplicationOperand,
+          1
+        );
         mantissaArray[mantissaNumberBits - operationsCounter - 1] = 1;
       }
       operationsCounter++;
@@ -370,7 +378,6 @@ systemForm.addEventListener("submit", function (e) {
     }
 
     html += "</tr>" + "<tr><th>" + sign + "</th>";
-    //console.log(exponentArray);
     for (i = 0; i < exponentNumberBits; i++) {
       html += "<th>" + exponentArray.charAt(i) + "</th>";
     }
@@ -386,12 +393,6 @@ systemForm.addEventListener("submit", function (e) {
 
 //Devuelve true si los datos introducidos son correctos, false en caso contrario.
 function dataIsOk(formData) {
-  /*console.log(
-    "El numero introducido es " +
-      formData.get("number") +
-      " y la comparacion sale " +
-      isNaN(formData.get("number"))
-  );*/
   //Si no hay seleccionado ningún modo de precisión o si el valor introducido no es un número (en tal caso el casting a Number dará NaN, Not a Number):
   if (
     !formData.has("precisionMode") ||
@@ -405,7 +406,7 @@ function dataIsOk(formData) {
 
 //Realiza una división entera. Cortesía de https://stackoverflow.com/questions/4228356/how-to-perform-an-integer-division-and-separately-get-the-remainder-in-javascr.
 function div(x, y) {
-  return Math.trunc(x / y);
+  return Decimal.trunc(Decimal.div(x, y));
 }
 
 //Devuelve un Number con los decimales del parámetro x.
@@ -416,5 +417,11 @@ function decimals(x) {
   stringDecimals = stringNumber.split(".")[1]; //Para entender esto, consultar https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split.
   stringDecimals = "0." + stringDecimals; //Le concatenamos '0.', para convertirlo a Number posteriormente.
 
-  return Number(stringDecimals); //Convertimos la String a Number y lo retornamos.
+  return Decimal(stringDecimals); //Convertimos la String a Number y lo retornamos. Aquí está el fallo, por revisar.
+}
+
+//Devuelve un entero: el número de decimales de un Number pasado por el parámetro x.
+function numberOfDecimals(x) {
+  let stringNumber = x.toString(); //Convertimos el Number recibido a String.
+  return stringNumber.split(".")[1].length; //Devuelve el número de caracteres de la cadena de después del '.'.
 }
