@@ -412,7 +412,7 @@ function div(x, y) {
 //Devuelve un Decimal con los decimales del parámetro x.
 function decimals(x) {
   let stringDecimals = "";
-  let stringNumber = x.toString(); //Convertimos el Decimal recibido a String.
+  let stringNumber = x.toString(); 
 
   stringDecimals = stringNumber.split(".")[1]; //Para entender esto, consultar https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split.
   if (stringDecimals === undefined) {
@@ -441,3 +441,4 @@ function decimalsToString(decimals) {
   }
   return stringDecimals;
 }
+º
