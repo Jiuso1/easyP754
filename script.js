@@ -57,7 +57,7 @@ systemForm.addEventListener("submit", function (e) {
     "<p>Para representar un número en el estándar IEEE P754 debemos saber si este pertenece a la zona normalizada o a la zona desnormalizada.</p>" +
     "<p>En función de la zona a la que pertenezca dicho número, emplearemos una fórmula u otra.</p>" +
     "<p>El exceso en simple precisión vale 127, y en doble precisión vale 1023.</p>" +
-    "<p>En la imagen anterior podemos apreciar estas zonas tanto en el rango negativo como en el positivo, con sus respectivas fórmulas:</p>" +
+    "<p>En la imagen anterior podemos apreciar estas zonas tanto en el rango negativo como en el positivo, con sus respectivas fórmulas.</p>" +
     "<p>Vemos un espacio entre las distintas zonas. Esto es debido a las limitaciones físicas y teóricas del sistema de representación, no podemos representar" +
     " todos los números que existen. También vemos que el número 0, el infinito y las indeterminaciones son casos aparte de este sistema. Si ingresa alguno de estos " +
     "casos en la calculadora, podrá ver cómo se representan estos casos especiales.</p>" +
@@ -412,7 +412,7 @@ function div(x, y) {
 //Devuelve un Decimal con los decimales del parámetro x.
 function decimals(x) {
   let stringDecimals = "";
-  let stringNumber = x.toString(); 
+  let stringNumber = x.toString();
 
   stringDecimals = stringNumber.split(".")[1]; //Para entender esto, consultar https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split.
   if (stringDecimals === undefined) {
@@ -441,4 +441,4 @@ function decimalsToString(decimals) {
   }
   return stringDecimals;
 }
-º
+º;
