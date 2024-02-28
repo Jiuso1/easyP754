@@ -185,7 +185,7 @@ systemForm.addEventListener("submit", function (e) {
         y +
         "</p>" +
         "</div>" +
-        "<p>Redondeamos al entero menor más próximo.</p>" +
+        '<p>Redondeamos <span class="bold">Y\'</span> al entero menor más próximo.</p>' +
         '<div class="equation">' +
         "<p> y = " +
         roundedY +
@@ -363,7 +363,9 @@ systemForm.addEventListener("submit", function (e) {
     }
 
     //Por último, mostramos el resultado recorriendo los arrays de bits que hemos calculado anteriormente:
-    html += "<h4>Resultado</h4>" + "<table><tr><th>S</th>";
+    html +=
+      "<h4>Resultado</h4>" +
+      '<div class="tableContainer"><table><tr><th>S</th>';
 
     //Hacemos una "extensión de signo". Necesitamos forzosamente exponentNumberBits, así que rellenamos con 0s si nos faltan bits.
     while (exponentArray.length < exponentNumberBits) {
@@ -386,7 +388,7 @@ systemForm.addEventListener("submit", function (e) {
     for (i = mantissaNumberBits - 1; i >= 0; i--) {
       html += "<th>" + mantissaArray[i] + "</th>";
     }
-    html += "</tr>" + "</table>";
+    html += "</tr>" + "</table></div>";
   } else {
     console.log("Numero negativo");
   }

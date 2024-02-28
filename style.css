@@ -171,3 +171,6 @@ th,
 td {
   border: 1px solid;
 }
+.tableContainer {
+  overflow-x: auto;
+}
