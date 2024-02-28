@@ -262,13 +262,8 @@ systemForm.addEventListener("submit", function (e) {
         operationsCounter++;
       }
     } else {
-      x = number / 2 ** (-excess + 1);
-      exponent = 0; //En la zona desnormalizada, E = 0.
-      previousMultiplicationOperand = decimals(x); //Solo nos quedamos con la parte decimal de la X.
-      nextMultiplicationOperand = new Decimal(0);
-      exponentArray = exponent.toString(2); //exponentArray almacena exponent en forma binaria, en una cadena de texto.
-
       console.log("Numero menor al punto azul positivo");
+
       html +=
         "<p>Como " +
         number +
@@ -276,6 +271,13 @@ systemForm.addEventListener("submit", function (e) {
         "2<sup>" +
         (exponent - excess) +
         "</sup>), se encuentra en la zona desnormalizada.</p>";
+
+      //Realizamos los cálculos:
+      x = number / 2 ** (-excess + 1);
+      exponent = 0; //En la zona desnormalizada, E = 0.
+      previousMultiplicationOperand = decimals(x); //Solo nos quedamos con la parte decimal de la X.
+      nextMultiplicationOperand = new Decimal(0);
+      exponentArray = exponent.toString(2); //exponentArray almacena exponent en forma binaria, en una cadena de texto.
 
       html +=
         "<h4>Cálculos</h4>" +
@@ -302,7 +304,7 @@ systemForm.addEventListener("submit", function (e) {
         '<div class="equation">' +
         "<p>V(X) = " +
         number +
-        ' = <span class="blueXSquare">0,M<span class="x_item">x</span></span> &times; 2<sup>  ' +
+        ' = <span class="blueXSquare">0,M<span class="x_item">x</span></span> &times; 2<sup>' +
         (-excess + 1) +
         "</sup></p>" +
         "</div>" +
@@ -441,4 +443,3 @@ function decimalsToString(decimals) {
   }
   return stringDecimals;
 }
-º;
