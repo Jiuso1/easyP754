@@ -7,6 +7,8 @@ let systemForm = document.getElementById("systemForm");
 
 systemForm.addEventListener("submit", function (e) {
   let number = null; //Inicializamos a null el número.
+  let inputBase = null; //Base de la potencia introducida.
+  let inputExponent = null; //Exponente de la potencia introducida.
 
   e.preventDefault(); //No va a ningún action, se queda en la web.
   var formData = new FormData(systemForm); //Recogemos los datos del formulario en formData.
@@ -19,11 +21,13 @@ systemForm.addEventListener("submit", function (e) {
 
   if (formData.get("number").indexOf("**") != -1) {
     //Si contiene el operador exponente:
-    number = eval(formData.get("number")); //Evaluamos y realizamos las operaciones aritméticas pertinentes.
-    //console.log("Evalúo");
+    //Guardamos la base y el exponente:
+    inputBase = getBase(formData.get("number")); //Guardamos la base introducida.
+    inputExponent = getExponent(formData.get("number")); //Guardamos el exponente introducido.
+    number = eval(formData.get("number")); //Evaluamos para calcular la potencia en  un número decimal.
   } else {
-    number = formData.get("number"); //No evaluamos ninguna expresión, simplemente transformamos la String a Number.
-    //console.log("Transformo");
+    //Si no contiene el operador exponente:
+    number = formData.get("number"); //No evaluamos (pues no hay potencia), simplemente transformamos la String a Number.
   }
 
   //Recogemos en variables los datos del formulario guardados en formData:
@@ -96,8 +100,8 @@ systemForm.addEventListener("submit", function (e) {
       " es positivo, compararemos con el punto azul de la zona normalizada positiva. Es decir, con el número más pequeño de esa zona.</p>" +
       "<p>El punto azul que estamos estudiando (el derecho) es positivo, por tanto el bit de signo (S) vale 0.</p>" +
       '<p>Como este punto se encuentra en la zona normalizada, el campo exponente (E) debe ser distinto de 0 (observar imagen de <a href="#introduccion">Introducción</a>). ' +
-      "Como es el valor más pequeño, pondremos el campo exponente más pequeño que podamos (1)</p>" +
-      "<p>La zona normalizada no impone restricciones de ningún tipo al campo mantisa (M), así que pondremos la M más pequeña que podamos (0).</p>" +
+      "Como es el valor más pequeño, pondremos el campo exponente más pequeño que podamos: 1.</p>" +
+      "<p>La zona normalizada no impone restricciones de ningún tipo al campo mantisa (M), así que pondremos la M más pequeña que podamos: 0.</p>" +
       "<p>Ya tenemos S, E y M, así que basta con utilizar la fórmula de la zona normalizada y operar.</p>" +
       '<div class="equation">' +
       "<p>V(X) = (-1)<sup>S</sup> &times; 1,M &times; 2<sup>E-EXCESO</sup></p>" +
@@ -266,14 +270,17 @@ systemForm.addEventListener("submit", function (e) {
 
       html +=
         "<p>Como " +
-        number +
+        inputBase +
+        "<sup>" +
+        inputExponent +
+        "</sup>" +
         " es menor que el punto azul (" +
         "2<sup>" +
         (exponent - excess) +
         "</sup>), se encuentra en la zona desnormalizada.</p>";
 
       //Realizamos los cálculos:
-      x = number / 2 ** (-excess + 1);
+      x = Math.pow(2, inputExponent - (-excess + 1)); //number / 2 ** (-excess + 1);
       exponent = 0; //En la zona desnormalizada, E = 0.
       previousMultiplicationOperand = decimals(x); //Solo nos quedamos con la parte decimal de la X.
       nextMultiplicationOperand = new Decimal(0);
@@ -282,11 +289,17 @@ systemForm.addEventListener("submit", function (e) {
       html +=
         "<h4>Cálculos</h4>" +
         "<p>Sabiendo que " +
-        number +
+        inputBase +
+        "<sup>" +
+        inputExponent +
+        "</sup>" +
         " pertenece a la zona desnormalizada, podemos emplear su fórmula.</p>" +
         '<div class="equation">' +
         "<p>V(X) = " +
-        number +
+        inputBase +
+        "<sup>" +
+        inputExponent +
+        "</sup>" +
         " = 0,M &times; 2<sup>-" +
         excess +
         " + 1" +
@@ -295,7 +308,10 @@ systemForm.addEventListener("submit", function (e) {
         "<p>Desarrollamos el exponente.</p>" +
         '<div class="equation">' +
         "<p>V(X) = " +
-        number +
+        inputBase +
+        "<sup>" +
+        inputExponent +
+        "</sup>" +
         " = 0,M &times; 2<sup>" +
         (-excess + 1) +
         "</sup></p>" +
@@ -303,7 +319,10 @@ systemForm.addEventListener("submit", function (e) {
         '<p>Consideraremos el siguiente sistema de dos ecuaciones con incógnita <span class="bold">X</span>.</p>' +
         '<div class="equation">' +
         "<p>V(X) = " +
-        number +
+        inputBase +
+        "<sup>" +
+        inputExponent +
+        "</sup>" +
         ' = <span class="blueXSquare">0,M<span class="x_item">x</span></span> &times; 2<sup>' +
         (-excess + 1) +
         "</sup></p>" +
@@ -314,21 +333,33 @@ systemForm.addEventListener("submit", function (e) {
         '<p>Resolvemos la ecuación que tiene como incógnita <span class="bold">X</span>.' +
         '<div class="equation">' +
         "<p>V(X) = " +
-        number +
+        inputBase +
+        "<sup>" +
+        inputExponent +
+        "</sup>" +
         " = x &times; 2<sup>" +
         (-excess + 1) +
         "</sup></p>" +
         "</div>" +
         '<div class="equation">' +
         "<p>x = " +
-        number +
+        inputBase +
+        "<sup>" +
+        inputExponent +
+        "</sup>" +
         " &divide; " +
-        2 ** (-excess + 1) +
+        2 +
+        "<sup>" +
+        (-excess + 1) +
+        "</sup>" +
         "</p>" +
         "</div>" +
         '<div class="equation">' +
         "<p>x = " +
-        x +
+        2 +
+        "<sup>" +
+        (inputExponent - (-excess + 1)) +
+        "</sup>" +
         "</p>" +
         "</div>" +
         '<p>Nos falta hallar la mantisa (M). Esta se calcula cogiendo la parte decimal de la <span class="bold">X</span>, ' +
@@ -339,6 +370,7 @@ systemForm.addEventListener("submit", function (e) {
       nextMultiplicationOperand != 1 &&
       operationsCounter < mantissaNumberBits
     ) {
+      console.log("nextMultiplicationOperand: " + nextMultiplicationOperand);
       nextMultiplicationOperand = Decimal.mul(previousMultiplicationOperand, 2); //Margen de error a corregir, PENDIENTE.
       mantissaBit = div(nextMultiplicationOperand, 1);
       html +=
@@ -444,4 +476,16 @@ function decimalsToString(decimals) {
     stringDecimals = "0";
   }
   return stringDecimals;
+}
+
+//Devuelve un entero: la base de la potencia almacenada en stringNumber.
+function getBase(stringNumber) {
+  let base = parseInt(stringNumber.split("**")[0]); //Nos quedamos con lo anterior a ** (la base) y lo convertimos a entero.
+  return base; //Retornamos la base.
+}
+
+//Devuelve un entero: la base del exponente almacenada en stringNumber.
+function getExponent(stringNumber) {
+  let exponent = parseInt(stringNumber.split("**")[1]); //Nos quedamos con lo posterior a ** (el exponente) y lo convertimos a entero.
+  return exponent; //Retornamos el exponente.
 }
