@@ -1,9 +1,5 @@
-//console.log((0.2 * 10 + 0.1 * 10) / 10);
-//console.log(numberOfDecimals(3.569329));
-//console.log((0.2 * 10 + 0.1 * 10) / 10);
-//console.log("div: " + div(7, 2));
-
 let systemForm = document.getElementById("systemForm");
+let buttonForm = document.getElementById("buttonForm");
 
 systemForm.addEventListener("submit", function (e) {
   let number = null; //Inicializamos a null el número.
@@ -15,9 +11,11 @@ systemForm.addEventListener("submit", function (e) {
 
   //Si los datos introducidos no son válidos, avisamos al usuario:
   if (!dataIsOk(formData)) {
-    alert("Error: compruebe los datos introducidos.");
+    alert("Error: compruebe que ha introducido correctamente los datos.");
     return;
   }
+
+  buttonForm.value = "Limpiar datos"; //Cambiamos el texto del botón para facilitar al usuario que limpie los datos y reinicie la aplicación.
 
   if (formData.get("number").indexOf("**") != -1) {
     //Si contiene el operador exponente:
@@ -45,6 +43,7 @@ systemForm.addEventListener("submit", function (e) {
   let nextMultiplicationOperand = new Decimal(0);
   let operationsCounter = 0; //Cuando se realiza una operación en el bucle while encargado de calcular la mantisa (M), incrementa en uno.
   let mantissaBit = 0;
+  let currentExponent = 0; //Exponente que cambia conforme se multiplica por dos para hallar la mantisa.
   //Variables que controlan la presentación del resultado:
   const mantissaNumberBits =
     precisionMode.localeCompare("simplePrecision") == 0 ? 23 : 52; //Si el modo elegido es simple precisión, el nº de bits de la mantisa es 23. Sino (si es doble precisión), es 52.
@@ -285,6 +284,8 @@ systemForm.addEventListener("submit", function (e) {
       previousMultiplicationOperand = decimals(x); //Solo nos quedamos con la parte decimal de la X.
       nextMultiplicationOperand = new Decimal(0);
       exponentArray = exponent.toString(2); //exponentArray almacena exponent en forma binaria, en una cadena de texto.
+      currentExponent = inputExponent - (-excess + 1);
+      mantissaBit = 0;
 
       html +=
         "<h4>Cálculos</h4>" +
@@ -362,35 +363,31 @@ systemForm.addEventListener("submit", function (e) {
         "</sup>" +
         "</p>" +
         "</div>" +
-        '<p>Nos falta hallar la mantisa (M). Esta se calcula cogiendo la parte decimal de la <span class="bold">X</span>, ' +
-        "multiplicándola por dos hasta llegar a 1,00. Los bits, que van de mayor a menor peso, son coloreados.</p>";
+        '<p>Nos falta hallar la mantisa (M). Esta se calcula multiplicando la <span class="bold">X</span> ' +
+        "por dos hasta llegar a 1. Cuando la potencia es igual a 1, el bit de la mantisa vale 1. Los bits, que van de mayor a menor peso, son coloreados.</p>";
     }
-    //Mientras el resultado no sea 1,00 y mientras no hayamos pasado el nº de operaciones máximo:
-    while (
-      nextMultiplicationOperand != 1 &&
-      operationsCounter < mantissaNumberBits
-    ) {
-      console.log("nextMultiplicationOperand: " + nextMultiplicationOperand);
-      nextMultiplicationOperand = Decimal.mul(previousMultiplicationOperand, 2); //Margen de error a corregir, PENDIENTE.
-      mantissaBit = div(nextMultiplicationOperand, 1);
-      html +=
-        '<div class="equation"><p>' +
-        previousMultiplicationOperand +
-        " &times; 2 = " +
-        '<span class="orange">' +
-        mantissaBit +
-        "</span>" +
-        "." +
-        decimalsToString(decimals(nextMultiplicationOperand)) + //Separamos parte decimal y parte binaria para colorear los decimales. + //Separamos parte decimal y parte binaria para colorear los decimales.
-        "</p></div>";
-      previousMultiplicationOperand = nextMultiplicationOperand; //Aquí es donde hay problemas, REVISAR.
-      if (previousMultiplicationOperand >= 1) {
-        previousMultiplicationOperand = Decimal.sub(
-          previousMultiplicationOperand,
-          1
-        );
+    while (currentExponent != 0 && operationsCounter < mantissaNumberBits) {
+      if (currentExponent + 1 == 0) {
+        mantissaBit = 1;
         mantissaArray[mantissaNumberBits - operationsCounter - 1] = 1;
       }
+      html +=
+        '<div class="equation"><p>' +
+        2 +
+        "<sup>" +
+        currentExponent +
+        "</sup>" +
+        " &times; 2 = " +
+        2 +
+        "<sup>" +
+        (currentExponent + 1) +
+        "</sup>" +
+        ' <span class="orange">' +
+        mantissaBit +
+        "</span>" +
+        "</p></div>";
+
+      currentExponent++;
       operationsCounter++;
     }
 
@@ -425,6 +422,7 @@ systemForm.addEventListener("submit", function (e) {
     console.log("Numero negativo");
   }
   document.body.innerHTML = document.body.innerHTML + html; //Añadimos al HTML todo lo escrito.
+  window.scrollTo(0, 550); //Desplazamos al usuario al nuevo contenido añadido.
 });
 
 //Devuelve true si los datos introducidos son correctos, false en caso contrario.
@@ -440,7 +438,7 @@ function dataIsOk(formData) {
   }
 }
 
-//Realiza una división entera. Cortesía de https://stackoverflow.com/questions/4228356/how-to-perform-an-integer-division-and-separately-get-the-remainder-in-javascr.
+//Realiza una división entera. Cortesía de https://stackoverflow.com/questions/4228356/how-to-perform-an-integer-division-and-separately-get-the-remainder-in-javascr
 function div(x, y) {
   return Decimal.trunc(Decimal.div(x, y));
 }
@@ -450,7 +448,7 @@ function decimals(x) {
   let stringDecimals = "";
   let stringNumber = x.toString();
 
-  stringDecimals = stringNumber.split(".")[1]; //Para entender esto, consultar https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split.
+  stringDecimals = stringNumber.split(".")[1]; //Para entender esto, consultar https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split
   if (stringDecimals === undefined) {
     //Si no tiene decimales:
     stringDecimals = "0";

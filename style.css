@@ -172,5 +172,8 @@ td {
   border: 1px solid;
 }
 .tableContainer {
-  overflow-x: auto;
+  overflow-x: scroll;
+}
+html{
+  scroll-behavior: smooth;/*Cortesía de https://stackoverflow.com/questions/12199363/scrollto-with-animation*/
 }
