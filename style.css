@@ -63,7 +63,7 @@ input[type="submit"]:hover {
 p {
   text-align: left;
   font-size: 1rem;
-  font-family: sans-serif;
+  font-family: Arial, sans-serif, Helvetica;
   max-width: 50rem;
   margin: auto;
   margin-top: 0.5rem;
