@@ -1,6 +1,6 @@
 # EasyP754
 
-![App image](https://i.ibb.co/dQ24s7W/image-original.png)
+![image-original](https://i.ibb.co/dQ24s7W/image-original.png)
 
 ## Español
 
