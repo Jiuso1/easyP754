@@ -38,7 +38,7 @@ systemForm.addEventListener("submit", function (e) {
   //Variables necesarias para los cálculos:
   let y = 0;
   let x = 0;
-  let roundedY = 0;
+  let roundedY = new Decimal(0);
   let previousMultiplicationOperand = new Decimal(0);
   let nextMultiplicationOperand = new Decimal(0);
   let operationsCounter = 0; //Cuando se realiza una operación en el bucle while encargado de calcular la mantisa (M), incrementa en uno.
@@ -121,11 +121,11 @@ systemForm.addEventListener("submit", function (e) {
       (exponent - excess) +
       "</sup></p>" +
       "</div>";
-    if (number >= Math.pow(2, exponent - excess)) {
+    if (number >= Decimal.pow(2, exponent - excess)) {
       //Si el número introducido por teclado es mayor que el punto azul, este se encuentra en la zona normalizada.
       //Realizamos los cálculos pertinentes para mostrarlos más adelante:
-      y = Math.log2(number);
-      roundedY = Math.floor(y); //Redondeamos la Y' al entero menor más próximo posible.
+      y = Decimal.log2(number);
+      roundedY = Decimal.floor(y); //Redondeamos la Y' al entero menor más próximo posible.
       x = number / 2 ** roundedY;
 
       html +=
@@ -136,7 +136,7 @@ systemForm.addEventListener("submit", function (e) {
         (exponent - excess) +
         "</sup>), se encuentra en la zona normalizada.</p>";
 
-      exponent = roundedY + excess;
+      exponent = Decimal.add(roundedY, excess);
       previousMultiplicationOperand = decimals(x); //Solo nos quedamos con la parte decimal de la x. Falla decimals, POR REVISAR.
       nextMultiplicationOperand = new Decimal(0);
       exponentArray = exponent.toString(2); //exponentArray almacena exponent en forma binaria, en una cadena de texto.
@@ -279,7 +279,7 @@ systemForm.addEventListener("submit", function (e) {
         "</sup>), se encuentra en la zona desnormalizada.</p>";
 
       //Realizamos los cálculos:
-      x = Math.pow(2, inputExponent - (-excess + 1)); //number / 2 ** (-excess + 1);
+      x = Decimal.pow(2, inputExponent - (-excess + 1)); //number / 2 ** (-excess + 1);
       exponent = 0; //En la zona desnormalizada, E = 0.
       previousMultiplicationOperand = decimals(x); //Solo nos quedamos con la parte decimal de la X.
       nextMultiplicationOperand = new Decimal(0);
@@ -412,6 +412,9 @@ systemForm.addEventListener("submit", function (e) {
 
     html += "</tr>" + "<tr><th>" + sign + "</th>";
     for (i = 0; i < exponentNumberBits; i++) {
+      console.log(
+        "exponentArray.charAt(" + i + "): " + exponentArray.charAt(i)
+      );
       html += "<th>" + exponentArray.charAt(i) + "</th>";
     }
     for (i = mantissaNumberBits - 1; i >= 0; i--) {
@@ -486,4 +489,9 @@ function getBase(stringNumber) {
 function getExponent(stringNumber) {
   let exponent = parseInt(stringNumber.split("**")[1]); //Nos quedamos con lo posterior a ** (el exponente) y lo convertimos a entero.
   return exponent; //Retornamos el exponente.
+}
+
+//Cortesía de https://stackoverflow.com/questions/7390426/better-way-to-get-type-of-a-javascript-variable
+function typeOf(obj) {
+  return {}.toString.call(obj).split(" ")[1].slice(0, -1).toLowerCase();
 }
