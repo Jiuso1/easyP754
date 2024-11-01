@@ -136,10 +136,19 @@ systemForm.addEventListener("submit", function (e) {
         (exponent - excess) +
         "</sup>), se encuentra en la zona normalizada.</p>";
 
-      exponent = Decimal.add(roundedY, excess);
+      exponent = Number(roundedY) + Number(excess);
       previousMultiplicationOperand = decimals(x); //Solo nos quedamos con la parte decimal de la x. Falla decimals, POR REVISAR.
       nextMultiplicationOperand = new Decimal(0);
       exponentArray = exponent.toString(2); //exponentArray almacena exponent en forma binaria, en una cadena de texto.
+
+      console.log("exponent type: " + typeOf(exponent));
+      console.log("exponent value: " + exponent);
+
+      for (i = 0; i < exponentNumberBits; i++) {
+        console.log(
+          "exponentArray.charAt(" + i + "): " + exponentArray.charAt(i)
+        );
+      }
 
       html +=
         "<h4>Cálculos</h4>" +
@@ -412,9 +421,6 @@ systemForm.addEventListener("submit", function (e) {
 
     html += "</tr>" + "<tr><th>" + sign + "</th>";
     for (i = 0; i < exponentNumberBits; i++) {
-      console.log(
-        "exponentArray.charAt(" + i + "): " + exponentArray.charAt(i)
-      );
       html += "<th>" + exponentArray.charAt(i) + "</th>";
     }
     for (i = mantissaNumberBits - 1; i >= 0; i--) {
