@@ -141,15 +141,6 @@ systemForm.addEventListener("submit", function (e) {
       nextMultiplicationOperand = new Decimal(0);
       exponentArray = exponent.toString(2); //exponentArray almacena exponent en forma binaria, en una cadena de texto.
 
-      console.log("exponent type: " + typeOf(exponent));
-      console.log("exponent value: " + exponent);
-
-      for (i = 0; i < exponentNumberBits; i++) {
-        console.log(
-          "exponentArray.charAt(" + i + "): " + exponentArray.charAt(i)
-        );
-      }
-
       html +=
         "<h4>Cálculos</h4>" +
         "<p>Sabiendo que " +
@@ -274,7 +265,7 @@ systemForm.addEventListener("submit", function (e) {
         operationsCounter++;
       }
     } else {
-      console.log("Numero menor al punto azul positivo");
+      //console.log("Numero menor al punto azul positivo");
 
       html +=
         "<p>Como " +
@@ -428,7 +419,7 @@ systemForm.addEventListener("submit", function (e) {
     }
     html += "</tr>" + "</table></div>";
   } else {
-    console.log("Numero negativo");
+    //console.log("Numero negativo");
   }
   document.body.innerHTML = document.body.innerHTML + html; //Añadimos al HTML todo lo escrito.
   window.scrollTo(0, 550); //Desplazamos al usuario al nuevo contenido añadido.

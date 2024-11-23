@@ -1,49 +1,44 @@
-#easy {
-  color: #59cd00;
-}
-
-#p {
-  color: #00a8f3;
-}
-
-#number754 {
-  color: darkblue;
-}
-
 h1 {
   text-align: center;
   font-size: 5rem;
-  font-family: monospace;
-  text-decoration-line: underline;
-  text-decoration-color: #a5cd6c;
+  font-family: sans-serif;
+  color: #0f62fe;
 }
+
 h2 {
   text-align: center;
   font-family: sans-serif;
 }
+
 form {
   text-align: center;
   font-family: sans-serif;
 }
+
 input[type="submit"] {
   margin-left: 1rem;
 }
+
 fieldset {
   border: 0;
 }
+
 label:hover {
   cursor: pointer;
 }
+
 h3 {
   color: #acacac;
   font-family: sans-serif;
 }
+
 input[type="text"] {
   font-family: sans-serif;
   font-size: 2rem;
 }
+
 input[type="submit"] {
-  background-color: #59cd00;
+  background-color: #0f62fe;
   font-size: 2rem;
   border: none;
   padding: 14px 20px;
@@ -51,8 +46,9 @@ input[type="submit"] {
   margin-top: 1rem;
   color: #ffffff;
 }
+
 input[type="submit"]:hover {
-  background-color: #49a700;
+  background-color: #0043ce;
   font-size: 2rem;
   border: none;
   padding: 14px 20px;
@@ -60,6 +56,7 @@ input[type="submit"]:hover {
   margin-top: 1rem;
   color: #ffffff;
 }
+
 p {
   text-align: left;
   font-size: 1rem;
@@ -68,6 +65,7 @@ p {
   margin: auto;
   margin-top: 0.5rem;
 }
+
 img {
   text-align: center;
   margin-left: auto;
@@ -76,104 +74,94 @@ img {
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
-.title:hover {
-  cursor: pointer;
-  margin: auto;
-  width: 30rem;
-  background: #33cccc; /* Fallback */
-  animation: color 9s infinite linear;
-  text-align: center;
-  border-radius: 2rem;
-}
-@keyframes color {
-  0% {
-    background: #33cccc;
-  }
-  20% {
-    background: #33cc36;
-  }
-  40% {
-    background: #b8cc33;
-  }
-  60% {
-    background: #fcca00;
-  }
-  80% {
-    background: #33cc36;
-  }
-  100% {
-    background: #33cccc;
-  }
-}
+
 a {
   text-decoration: none;
 }
+
 h4 {
   text-align: center;
   font-family: sans-serif;
   font-size: 1.2rem;
 }
+
 .listContainer {
   text-align: left;
   max-width: 50rem;
   margin: auto;
 }
+
 dt {
   font-family: sans-serif;
   font-weight: bold;
   font-size: 1.2rem;
 }
+
 dd {
   font-family: sans-serif;
 }
+
 .equation p {
   font-family: sans-serif;
   font-size: 2rem;
 }
+
 sup {
   font-size: 1.3rem;
 }
+
 .blueXSquare {
   background-color: #35bfff;
 }
+
 .redYSquare {
   background-color: rgb(255, 199, 245);
 }
+
 .x_item {
   color: white;
   margin-left: 1rem;
 }
+
 .y_item {
   color: rgb(55, 0, 55);
   margin-left: 0.75rem;
   font-size: 1.5rem;
 }
+
 sub {
   font-size: 1.3rem;
 }
+
 .orange {
   color: orange;
 }
+
 table {
   margin: auto;
   margin-top: 1rem;
   font-family: sans-serif;
   border-collapse: collapse;
 }
+
 table th sub {
-  font-size: 1rem;
+  font-size: 0.8rem;
 }
+
 .bold {
   font-weight: bold;
 }
+
 table,
 th,
 td {
   border: 1px solid;
 }
+
 .tableContainer {
   overflow-x: scroll;
 }
+
 html{
   scroll-behavior: smooth;/*Cortesía de https://stackoverflow.com/questions/12199363/scrollto-with-animation*/
 }
