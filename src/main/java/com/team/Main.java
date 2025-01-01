@@ -7,7 +7,7 @@ import static com.team.PrecisionMode.SIMPLE;
 
 public class Main {
     public static void main(String[] args) {
-        UserInput userInput = new UserInput("-ꝏ", SIMPLE);
+        UserInput userInput = new UserInput("+ꝏ", SIMPLE);
         Calculator calculator = new Calculator(userInput);
         UserOutput userOutput = calculator.calculateUserOutput();
         boolean sign = false;

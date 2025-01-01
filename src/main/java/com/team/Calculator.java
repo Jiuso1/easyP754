@@ -79,7 +79,7 @@ public class Calculator {
                     exponent.set(i, true);
                 }
                 for (int i = 0; i < numberOfMantissaBits; i++) {//All mantissa bits are set to 0:
-                    mantissa.set(i, true);
+                    mantissa.set(i, false);
                 }
                 userOutput = new UserOutput(sign, exponent, mantissa);
                 break;
@@ -92,7 +92,7 @@ public class Calculator {
                     exponent.set(i, true);
                 }
                 for (int i = 0; i < numberOfMantissaBits; i++) {//All mantissa bits are set to 0:
-                    mantissa.set(i, true);
+                    mantissa.set(i, false);
                 }
                 userOutput = new UserOutput(sign, exponent, mantissa);
                 break;
