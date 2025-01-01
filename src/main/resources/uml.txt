@@ -1,0 +1,52 @@
+@startuml
+enum PrecisionMode {
+    SIMPLE
+    DOUBLE
+}
+
+enum NumberType {
+    NORMALIZED
+    DENORMALIZED
+}
+
+class UserInput {
+    - final String text
+    - final PrecisionMode precisionMode
+    - BigDecimal number
+    - final boolean isSpecial
+    + UserInput(String text, PrecisionMode precisionMode)
+    + PrecisionMode getText()
+    + PrecisionMode getPrecisionMode()
+    + BigDecimal getNumber()
+    + boolean isSpecial()
+}
+
+class UserOutput {
+    - final boolean sign
+    - final BitSet exponent
+    - final BitSet mantissa
+    + UserOutput(boolean sign, BitSet exponent, BitSet mantissa)
+    + boolean getSign()
+    + BitSet getExponent()
+    + BitSet getMantissa()
+}
+
+class Calculator {
+    - UserInput userInput
+    + Calculator()
+    + Calculator(UserInput userInput)
+    + UserOutput calculateUserOutput()
+    + UserOutput calculateSpecialCase()
+    + UserOutput calculateUsualCase()
+    + UserOutput calculateNormalizedNumber()
+    + UserOutput calculateDenormalizedNumber()
+    + UserInput getUserInput()
+    + void setUserInput(UserInput userInput)
+}
+
+Exception <|-- ZeroException
+
+class ZeroException {
+    + ZeroException()
+}
+@enduml
