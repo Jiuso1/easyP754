@@ -1,28 +1,56 @@
 package com.team;
 
-import java.util.ArrayList;
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.BitSet;
+
+import ch.obermuhlner.math.big.BigDecimalMath;
 
 import static com.team.PrecisionMode.DOUBLE;
 import static com.team.PrecisionMode.SIMPLE;
 
 public class Calculator {
     private UserInput userInput;
+    private final MathContext mathContext;
 
     public Calculator() {
         userInput = null;
+        mathContext = new MathContext(100);//100 digit precision.
     }
 
     public Calculator(UserInput userInput) {
         this.userInput = userInput;
+        mathContext = new MathContext(100);//100 digit precision.
     }
 
     public UserOutput calculateUserOutput() {
         UserOutput userOutput = null;
+        int excess = 0;
+        BigDecimal smallestNormalizedNumber = null;
+        BigDecimal number = null;
+
         if (userInput.isSpecial()) {
             userOutput = calculateSpecialCase();
         } else {
-            userOutput = calculateUsualCase();
+            switch (userInput.getPrecisionMode()) {
+                case SIMPLE: {
+                    excess = 127;
+                    break;
+                }
+                case DOUBLE: {
+                    excess = 1022;
+                    break;
+                }
+            }
+
+            number = userInput.getNumber();
+            smallestNormalizedNumber = BigDecimalMath.pow(BigDecimal.valueOf(2), BigDecimal.valueOf(1 - excess), mathContext);//BigDecimal.valueOf(Math.pow(2, 1 - excess));
+
+            if (number.compareTo(smallestNormalizedNumber) >= 0) {//If the user input number is equal or bigger than the smallest normalized number:
+                userOutput = calculateNormalizedCase();//The number is in normalized area.
+            } else {//If the user input is smaller than the smallest normalized number:
+                userOutput = calculateDenormalizedCase();//The number is in denormalized area.
+            }
         }
 
         return userOutput;
@@ -36,12 +64,17 @@ public class Calculator {
         int numberOfExponentBits = 0;
         int numberOfMantissaBits = 0;
 
-        if (userInput.getPrecisionMode() == SIMPLE) {
-            numberOfExponentBits = 8;
-            numberOfMantissaBits = 23;
-        } else if (userInput.getPrecisionMode() == DOUBLE) {
-            numberOfExponentBits = 11;
-            numberOfMantissaBits = 52;
+        switch (userInput.getPrecisionMode()) {
+            case SIMPLE: {
+                numberOfExponentBits = 8;
+                numberOfMantissaBits = 23;
+                break;
+            }
+            case DOUBLE: {
+                numberOfExponentBits = 11;
+                numberOfMantissaBits = 52;
+                break;
+            }
         }
 
         System.out.println("Calculating special case...");
@@ -105,21 +138,18 @@ public class Calculator {
         return userOutput;
     }
 
-    public UserOutput calculateUsualCase() {
+    public UserOutput calculateNormalizedCase() {
         UserOutput userOutput = null;
-
-        System.out.println("Calculating usual case...");
-
+        BigDecimal number = userInput.getNumber();
+        System.out.println("Calculating normalized case...");
+        BigDecimal decimalY = BigDecimalMath.log2(number, mathContext);
+        System.out.println("decimalY: " + decimalY);
         return userOutput;
     }
 
-    public UserOutput calculateNormalizedNumber() {
+    public UserOutput calculateDenormalizedCase() {
         UserOutput userOutput = null;
-        return userOutput;
-    }
-
-    public UserOutput calculateDenormalizedNumber() {
-        UserOutput userOutput = null;
+        System.out.println("Calculating denormalized case...");
         return userOutput;
     }
 

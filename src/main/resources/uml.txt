@@ -33,13 +33,13 @@ class UserOutput {
 
 class Calculator {
     - UserInput userInput
+    - final MathContext mathContext
     + Calculator()
     + Calculator(UserInput userInput)
     + UserOutput calculateUserOutput()
     + UserOutput calculateSpecialCase()
-    + UserOutput calculateUsualCase()
-    + UserOutput calculateNormalizedNumber()
-    + UserOutput calculateDenormalizedNumber()
+    + UserOutput calculateNormalizedCase()
+    + UserOutput calculateDenormalizedCase()
     + UserInput getUserInput()
     + void setUserInput(UserInput userInput)
 }
