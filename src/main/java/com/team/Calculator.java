@@ -141,15 +141,33 @@ public class Calculator {
     public UserOutput calculateNormalizedCase() {
         UserOutput userOutput = null;
         BigDecimal number = userInput.getNumber();
-        System.out.println("Calculating normalized case...");
+        //Formulas are applied to get all bits:
         BigDecimal decimalY = BigDecimalMath.log2(number, mathContext);
-        System.out.println("decimalY: " + decimalY);
+        int integerY = (int) Math.floor(decimalY.doubleValue());
+        int excess = 0;
+        int integerExponent = 0;
+
+        switch (userInput.getPrecisionMode()) {
+            case SIMPLE: {
+                excess = 127;
+                break;
+            }
+            case DOUBLE: {
+                excess = 1022;
+                break;
+            }
+        }
+
+        integerExponent = integerY + excess;
+
+        System.out.println("integerExponent: "+integerExponent);
+
+
         return userOutput;
     }
 
     public UserOutput calculateDenormalizedCase() {
         UserOutput userOutput = null;
-        System.out.println("Calculating denormalized case...");
         return userOutput;
     }
 
