@@ -1,13 +1,10 @@
 package com.team;
 
+import ch.obermuhlner.math.big.BigDecimalMath;
+
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.BitSet;
-
-import ch.obermuhlner.math.big.BigDecimalMath;
-
-import static com.team.PrecisionMode.DOUBLE;
-import static com.team.PrecisionMode.SIMPLE;
 
 public class Calculator {
     private UserInput userInput;
@@ -160,7 +157,7 @@ public class Calculator {
 
         integerExponent = integerY + excess;
 
-        System.out.println("integerExponent: "+integerExponent);
+        System.out.println("integerExponent: " + integerExponent);
 
 
         return userOutput;
