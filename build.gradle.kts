@@ -19,7 +19,6 @@ dependencies {
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     implementation("ch.obermuhlner:big-math:2.3.2")
-    implementation("org.fxmisc.richtext:richtextfx:0.11.4")
 }
 
 tasks.test {
