@@ -157,9 +157,6 @@ public class Calculator {
 
         integerExponent = integerY + excess;
 
-        System.out.println("integerExponent: " + integerExponent);
-
-
         return userOutput;
     }
 

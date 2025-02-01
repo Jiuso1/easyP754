@@ -58,6 +58,7 @@ Application <|-- MainApplication
 
 class MainApplication{
     + void start(Stage primaryStage)
+    + void generateOutputTextArea(TextField inputTextField, ComboBox<String> precisionModeComboBox, TextArea outputTextArea)
     + static void main(String[] args)
 }
 @enduml
