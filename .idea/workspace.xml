@@ -15,6 +15,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/team/Calculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/team/Calculator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/team/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/team/MainApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/team/UserOutput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/team/UserOutput.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/uml.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/uml.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -249,6 +250,9 @@
       <workItem from="1738434180469" duration="189000" />
       <workItem from="1738437625198" duration="4118000" />
       <workItem from="1738445473132" duration="1500000" />
+      <workItem from="1738449045110" duration="370000" />
+      <workItem from="1738499571050" duration="65000" />
+      <workItem from="1738540848511" duration="4647000" />
     </task>
     <servers />
   </component>

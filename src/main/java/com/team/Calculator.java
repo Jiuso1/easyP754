@@ -58,6 +58,7 @@ public class Calculator {
         boolean sign = false;
         BitSet exponent = null;
         BitSet mantissa = null;
+        boolean isSpecial = userInput.isSpecial();
         int numberOfExponentBits = 0;
         int numberOfMantissaBits = 0;
 
@@ -74,8 +75,6 @@ public class Calculator {
             }
         }
 
-        System.out.println("Calculating special case...");
-
         switch (userInput.getText()) {
             case "+0": {
                 exponent = new BitSet(numberOfExponentBits);//BitSet constructor specifies the number of bits.
@@ -86,7 +85,7 @@ public class Calculator {
                 for (int i = 0; i < numberOfMantissaBits; i++) {//All mantissa bits are set to 0:
                     mantissa.set(i, false);
                 }
-                userOutput = new UserOutput(sign, exponent, mantissa);
+                userOutput = new UserOutput(sign, exponent, mantissa, isSpecial);
                 break;
             }
             case "-0": {
@@ -99,7 +98,7 @@ public class Calculator {
                 for (int i = 0; i < numberOfMantissaBits; i++) {//All mantissa bits are set to 0:
                     mantissa.set(i, false);
                 }
-                userOutput = new UserOutput(sign, exponent, mantissa);
+                userOutput = new UserOutput(sign, exponent, mantissa, isSpecial);
                 break;
             }
             case "+ꝏ": {
@@ -111,7 +110,7 @@ public class Calculator {
                 for (int i = 0; i < numberOfMantissaBits; i++) {//All mantissa bits are set to 0:
                     mantissa.set(i, false);
                 }
-                userOutput = new UserOutput(sign, exponent, mantissa);
+                userOutput = new UserOutput(sign, exponent, mantissa, isSpecial);
                 break;
             }
             case "-ꝏ": {
@@ -124,11 +123,8 @@ public class Calculator {
                 for (int i = 0; i < numberOfMantissaBits; i++) {//All mantissa bits are set to 0:
                     mantissa.set(i, false);
                 }
-                userOutput = new UserOutput(sign, exponent, mantissa);
+                userOutput = new UserOutput(sign, exponent, mantissa, isSpecial);
                 break;
-            }
-            default: {
-                System.out.println("Invalid input");
             }
         }
 

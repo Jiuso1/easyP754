@@ -25,10 +25,12 @@ class UserOutput {
     - final boolean sign
     - final BitSet exponent
     - final BitSet mantissa
-    + UserOutput(boolean sign, BitSet exponent, BitSet mantissa)
+    - final boolean isSpecial
+    + UserOutput(boolean sign, BitSet exponent, BitSet mantissa, boolean isSpecial)
     + boolean getSign()
     + BitSet getExponent()
     + BitSet getMantissa()
+    + boolean isSpecial()
 }
 
 class Calculator {

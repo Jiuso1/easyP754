@@ -31,6 +31,7 @@ public class MainApplication extends Application {
         Font font = new Font("Arial", 20);//Create a font for the output style.
         outputTextArea.setEditable(false);//output isn't editable.
         outputTextArea.setFont(font);//output has Arial 20 font.
+        outputTextArea.setPrefHeight(600);
         hBox.setAlignment(Pos.TOP_CENTER);//The horizontal box is aligned with the top center.
         hBox.getChildren().addAll(inputTextField, precisionModeComboBox, button);//Add input and button as children of hBox.
         root.getChildren().addAll(hBox, outputTextArea);//Add hBox and output as children of root.
@@ -46,6 +47,7 @@ public class MainApplication extends Application {
         boolean sign = false;
         BitSet exponent = null;
         BitSet mantissa = null;
+        boolean isSpecial = false;
         int numberOfExponentBits = 0;
         int numberOfMantissaBits = 0;
         String outputString = "";
@@ -64,12 +66,18 @@ public class MainApplication extends Application {
         }
 
         if (userOutput == null) {
-            outputString = "userOutput is null\n";
+            outputString = "An error occurred: userOutput is null.\n";
         } else {
             sign = userOutput.getSign();
             exponent = userOutput.getExponent();
             mantissa = userOutput.getMantissa();
-            outputString = "Result\n";
+            isSpecial = userOutput.isSpecial();
+            if (isSpecial) {
+                outputString = "The given input is a special case. Read your lecture notes in order to understand this result :-).\n";
+            } else {
+                outputString = "The input isn't a special case. We proceed with calculations.";
+            }
+            outputString += "Result:\n";
             outputString += "S: ";
             outputString += sign ? "1" : "0";
             outputString += "\n";
