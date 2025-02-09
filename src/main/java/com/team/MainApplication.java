@@ -51,8 +51,10 @@ public class MainApplication extends Application {
         int numberOfExponentBits = 0;
         int numberOfMantissaBits = 0;
         String outputString = "";
+        NumberType numberType = null;
+        PrecisionMode precisionMode = userInput.getPrecisionMode();
 
-        switch (userInput.getPrecisionMode()) {
+        switch (precisionMode) {
             case SIMPLE: {
                 numberOfExponentBits = 8;
                 numberOfMantissaBits = 23;
@@ -73,10 +75,20 @@ public class MainApplication extends Application {
             mantissa = userOutput.getMantissa();
             isSpecial = userOutput.isSpecial();
             if (isSpecial) {
-                outputString = "The given input is a special case. Read your lecture notes in order to understand this result :-).\n";
+                outputString = "The given input is a special case. Read your lecture notes in order to understand this result.\n";
             } else {
-                outputString = "The input isn't a special case. We proceed with calculations.";
+                outputString = "The input isn't a special case. We proceed with calculations.\n";
+                numberType = userOutput.getNumberType();//As it isn't a special case, the number could be in normalized area or in denormalized area.
+                switch (numberType) {
+                    case NORMALIZED: {
+                        break;
+                    }
+                    case DENORMALIZED: {
+                        break;
+                    }
+                }
             }
+
             outputString += "Result:\n";
             outputString += "S: ";
             outputString += sign ? "1" : "0";

@@ -7,12 +7,14 @@ public class UserOutput {
     private final BitSet exponent;
     private final BitSet mantissa;
     private final boolean isSpecial;
+    private final NumberType numberType;
 
-    public UserOutput(boolean sign, BitSet exponent, BitSet mantissa, boolean isSpecial) {
+    public UserOutput(boolean sign, BitSet exponent, BitSet mantissa, boolean isSpecial, NumberType numberType) {
         this.sign = sign;
         this.exponent = exponent;
         this.mantissa = mantissa;
         this.isSpecial = isSpecial;
+        this.numberType = numberType;
     }
 
     public boolean getSign() {
@@ -29,5 +31,9 @@ public class UserOutput {
 
     public boolean isSpecial() {
         return isSpecial;
+    }
+
+    public NumberType getNumberType() {
+        return numberType;
     }
 }

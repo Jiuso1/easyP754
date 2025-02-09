@@ -6,6 +6,9 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.BitSet;
 
+import static com.team.NumberType.DENORMALIZED;
+import static com.team.NumberType.NORMALIZED;
+
 public class Calculator {
     private UserInput userInput;
     private final MathContext mathContext;
@@ -25,11 +28,13 @@ public class Calculator {
         int excess = 0;
         BigDecimal smallestNormalizedNumber = null;
         BigDecimal number = null;
+        PrecisionMode precisionMode = userInput.getPrecisionMode();
+        boolean isSpecial = userInput.isSpecial();
 
-        if (userInput.isSpecial()) {
+        if (isSpecial) {
             userOutput = calculateSpecialCase();
         } else {
-            switch (userInput.getPrecisionMode()) {
+            switch (precisionMode) {
                 case SIMPLE: {
                     excess = 127;
                     break;
@@ -61,8 +66,10 @@ public class Calculator {
         boolean isSpecial = userInput.isSpecial();
         int numberOfExponentBits = 0;
         int numberOfMantissaBits = 0;
+        PrecisionMode precisionMode = userInput.getPrecisionMode();
+        String text = userInput.getText();
 
-        switch (userInput.getPrecisionMode()) {
+        switch (precisionMode) {
             case SIMPLE: {
                 numberOfExponentBits = 8;
                 numberOfMantissaBits = 23;
@@ -75,7 +82,7 @@ public class Calculator {
             }
         }
 
-        switch (userInput.getText()) {
+        switch (text) {
             case "+0": {
                 exponent = new BitSet(numberOfExponentBits);//BitSet constructor specifies the number of bits.
                 mantissa = new BitSet(numberOfMantissaBits);
@@ -85,7 +92,7 @@ public class Calculator {
                 for (int i = 0; i < numberOfMantissaBits; i++) {//All mantissa bits are set to 0:
                     mantissa.set(i, false);
                 }
-                userOutput = new UserOutput(sign, exponent, mantissa, isSpecial);
+                userOutput = new UserOutput(sign, exponent, mantissa, isSpecial, null);
                 break;
             }
             case "-0": {
@@ -98,7 +105,7 @@ public class Calculator {
                 for (int i = 0; i < numberOfMantissaBits; i++) {//All mantissa bits are set to 0:
                     mantissa.set(i, false);
                 }
-                userOutput = new UserOutput(sign, exponent, mantissa, isSpecial);
+                userOutput = new UserOutput(sign, exponent, mantissa, isSpecial, null);
                 break;
             }
             case "+ꝏ": {
@@ -110,7 +117,7 @@ public class Calculator {
                 for (int i = 0; i < numberOfMantissaBits; i++) {//All mantissa bits are set to 0:
                     mantissa.set(i, false);
                 }
-                userOutput = new UserOutput(sign, exponent, mantissa, isSpecial);
+                userOutput = new UserOutput(sign, exponent, mantissa, isSpecial, null);
                 break;
             }
             case "-ꝏ": {
@@ -123,7 +130,7 @@ public class Calculator {
                 for (int i = 0; i < numberOfMantissaBits; i++) {//All mantissa bits are set to 0:
                     mantissa.set(i, false);
                 }
-                userOutput = new UserOutput(sign, exponent, mantissa, isSpecial);
+                userOutput = new UserOutput(sign, exponent, mantissa, isSpecial, null);
                 break;
             }
         }
@@ -134,30 +141,47 @@ public class Calculator {
     public UserOutput calculateNormalizedCase() {
         UserOutput userOutput = null;
         BigDecimal number = userInput.getNumber();
-        //Formulas are applied to get all bits:
-        BigDecimal decimalY = BigDecimalMath.log2(number, mathContext);
-        int integerY = (int) Math.floor(decimalY.doubleValue());
+        boolean sign = false;
+        BitSet exponent = null;
+        BitSet mantissa = null;
         int excess = 0;
-        int integerExponent = 0;
+        NumberType numberType = NORMALIZED;//The number representation is in normalized area.
+        int numberOfExponentBits = 0;
+        int numberOfMantissaBits = 0;
+        PrecisionMode precisionMode = userInput.getPrecisionMode();
 
-        switch (userInput.getPrecisionMode()) {
+        switch (precisionMode) {
             case SIMPLE: {
+                numberOfExponentBits = 8;
+                numberOfMantissaBits = 23;
                 excess = 127;
                 break;
             }
             case DOUBLE: {
+                numberOfExponentBits = 11;
+                numberOfMantissaBits = 52;
                 excess = 1022;
                 break;
             }
         }
 
-        integerExponent = integerY + excess;
+        exponent = new BitSet(numberOfExponentBits);//BitSet constructor specifies the number of bits.
+        mantissa = new BitSet(numberOfMantissaBits);
+        for (int i = 0; i < numberOfExponentBits; i++) {//All exponent bits are set to 0:
+            exponent.set(i, false);
+        }
+        for (int i = 0; i < numberOfMantissaBits; i++) {//All mantissa bits are set to 0:
+            mantissa.set(i, false);
+        }
+
+        userOutput = new UserOutput(false, exponent, mantissa, false, numberType);
 
         return userOutput;
     }
 
     public UserOutput calculateDenormalizedCase() {
         UserOutput userOutput = null;
+        NumberType numberType = DENORMALIZED;//The number representation is in denormalized area.
         return userOutput;
     }
 
