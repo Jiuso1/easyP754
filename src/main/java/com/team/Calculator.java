@@ -49,7 +49,7 @@ public class Calculator {
             smallestNormalizedNumber = BigDecimalMath.pow(BigDecimal.valueOf(2), BigDecimal.valueOf(1 - excess), mathContext);//BigDecimal.valueOf(Math.pow(2, 1 - excess));
 
             if (number.compareTo(smallestNormalizedNumber) >= 0) {//If the user input number is equal or bigger than the smallest normalized number:
-                userOutput = calculateNormalizedCase();//The number is in normalized area.
+                userOutput = calculateNormalizedCase();//The number is in normalXized area.
             } else {//If the user input is smaller than the smallest normalized number:
                 userOutput = calculateDenormalizedCase();//The number is in denormalized area.
             }
@@ -92,7 +92,7 @@ public class Calculator {
                 for (int i = 0; i < numberOfMantissaBits; i++) {//All mantissa bits are set to 0:
                     mantissa.set(i, false);
                 }
-                userOutput = new UserOutput(sign, exponent, mantissa, isSpecial, null);
+                userOutput = new UserOutput(text, isSpecial, null, sign, exponent, mantissa);
                 break;
             }
             case "-0": {
@@ -105,7 +105,7 @@ public class Calculator {
                 for (int i = 0; i < numberOfMantissaBits; i++) {//All mantissa bits are set to 0:
                     mantissa.set(i, false);
                 }
-                userOutput = new UserOutput(sign, exponent, mantissa, isSpecial, null);
+                userOutput = new UserOutput(text, isSpecial, null, sign, exponent, mantissa);
                 break;
             }
             case "+ꝏ": {
@@ -117,7 +117,7 @@ public class Calculator {
                 for (int i = 0; i < numberOfMantissaBits; i++) {//All mantissa bits are set to 0:
                     mantissa.set(i, false);
                 }
-                userOutput = new UserOutput(sign, exponent, mantissa, isSpecial, null);
+                userOutput = new UserOutput(text, isSpecial, null, sign, exponent, mantissa);
                 break;
             }
             case "-ꝏ": {
@@ -130,7 +130,7 @@ public class Calculator {
                 for (int i = 0; i < numberOfMantissaBits; i++) {//All mantissa bits are set to 0:
                     mantissa.set(i, false);
                 }
-                userOutput = new UserOutput(sign, exponent, mantissa, isSpecial, null);
+                userOutput = new UserOutput(text, isSpecial, null, sign, exponent, mantissa);
                 break;
             }
         }
@@ -174,7 +174,7 @@ public class Calculator {
             mantissa.set(i, false);
         }
 
-        userOutput = new UserOutput(false, exponent, mantissa, false, numberType);
+        userOutput = new UserOutput(number.toString(), sign, numberType, sign, exponent, mantissa);
 
         return userOutput;
     }

@@ -3,18 +3,20 @@ package com.team;
 import java.util.BitSet;
 
 public class UserOutput {
+    private final String number;
+    private final boolean isSpecial;
+    private final NumberType numberType;
     private final boolean sign;
     private final BitSet exponent;
     private final BitSet mantissa;
-    private final boolean isSpecial;
-    private final NumberType numberType;
 
-    public UserOutput(boolean sign, BitSet exponent, BitSet mantissa, boolean isSpecial, NumberType numberType) {
+    public UserOutput(String number, boolean isSpecial, NumberType numberType, boolean sign, BitSet exponent, BitSet mantissa) {
+        this.number = number;
+        this.isSpecial = isSpecial;
+        this.numberType = numberType;
         this.sign = sign;
         this.exponent = exponent;
         this.mantissa = mantissa;
-        this.isSpecial = isSpecial;
-        this.numberType = numberType;
     }
 
     public boolean getSign() {
@@ -35,5 +37,9 @@ public class UserOutput {
 
     public NumberType getNumberType() {
         return numberType;
+    }
+
+    public String getNumber() {
+        return number;
     }
 }

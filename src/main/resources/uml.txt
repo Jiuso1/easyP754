@@ -22,17 +22,19 @@ class UserInput {
 }
 
 class UserOutput {
+    - final String number
+    - final boolean isSpecial
+    - final NumberType numberType
     - final boolean sign
     - final BitSet exponent
     - final BitSet mantissa
-    - final boolean isSpecial
-    - final NumberType numberType
-    + UserOutput(boolean sign, BitSet exponent, BitSet mantissa, boolean isSpecial, NumberType numberType)
+    + UserOutput(String number, boolean isSpecial, numberType, sign, exponent, mantissa)
+    + String getNumber()
+    + boolean isSpecial()
+    + NumberType getNumberType()
     + boolean getSign()
     + BitSet getExponent()
     + BitSet getMantissa()
-    + boolean isSpecial()
-    + NumberType getNumberType()
 }
 
 class Calculator {
@@ -58,9 +60,9 @@ class Main{
     + static void main(String[] args)
 }
 
-Application <|-- MainApplication
+Application <|-- ApplicationView
 
-class MainApplication{
+class ApplicationView{
     + void start(Stage primaryStage)
     + void generateOutputTextArea(TextField inputTextField, ComboBox<String> precisionModeComboBox, TextArea outputTextArea)
     + static void main(String[] args)

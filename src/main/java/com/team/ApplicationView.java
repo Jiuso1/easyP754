@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 
 import java.util.BitSet;
 
-public class MainApplication extends Application {
+public class ApplicationView extends Application {
     public void start(Stage primaryStage) {
         VBox root = new VBox();//Create a vertical box layout.
         HBox hBox = new HBox();//Create a horizontal box layout.
@@ -53,6 +53,7 @@ public class MainApplication extends Application {
         String outputString = "";
         NumberType numberType = null;
         PrecisionMode precisionMode = userInput.getPrecisionMode();
+        String numberString = "";
 
         switch (precisionMode) {
             case SIMPLE: {
@@ -79,11 +80,15 @@ public class MainApplication extends Application {
             } else {
                 outputString = "The input isn't a special case. We proceed with calculations.\n";
                 numberType = userOutput.getNumberType();//As it isn't a special case, the number could be in normalized area or in denormalized area.
+                numberString = userOutput.getNumber();//The number is saved as string.
                 switch (numberType) {
                     case NORMALIZED: {
+                        outputString += "The input representation is in normalized area.\n";
+                        outputString += "V(X) = " + numberString + " = 1,M • 2\n";
                         break;
                     }
                     case DENORMALIZED: {
+                        outputString += "The input representation is in denormalized area.\n";
                         break;
                     }
                 }
@@ -110,6 +115,6 @@ public class MainApplication extends Application {
     }
 
     public static void main(String[] args) {
-        Application.launch(MainApplication.class, args);
+        Application.launch(ApplicationView.class, args);
     }
 }
