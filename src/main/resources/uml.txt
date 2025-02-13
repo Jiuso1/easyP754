@@ -22,20 +22,38 @@ class UserInput {
 }
 
 class UserOutput {
-    - final String number
     - final boolean isSpecial
     - final NumberType numberType
+    - final int excess
+    - final BigDecimal number
+    - final BigDecimal decimalY
+    - final int y
+    - final int integerExponent
+    - final int twoRaisedToY
+    - final BigDecimal x
+    - final ArrayList<BigDecimal> operand
+    - final ArrayList<BigDecimal> result
     - final boolean sign
     - final BitSet exponent
     - final BitSet mantissa
-    + UserOutput(String number, boolean isSpecial, numberType, sign, exponent, mantissa)
-    + String getNumber()
+    + UserOutput(...)
     + boolean isSpecial()
     + NumberType getNumberType()
+    + int getExcess()
+    + BigDecimal getNumber()
+    + BigDecimal getDecimalY()
+    + int getY()
+    + int getIntegerExponent()
+    + int getTwoRaisedToY()
+    + BigDecimal getX()
+    + ArrayList<BigDecimal> getOperand()
+    + ArrayList<BigDecimal> getResult()
     + boolean getSign()
     + BitSet getExponent()
     + BitSet getMantissa()
 }
+
+note bottom of UserOutput : UserOutput constructor receives all attributes.
 
 class Calculator {
     - UserInput userInput

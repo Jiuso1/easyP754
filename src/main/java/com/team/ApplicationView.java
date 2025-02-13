@@ -14,8 +14,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-import java.util.BitSet;
-
 public class ApplicationView extends Application {
     public void start(Stage primaryStage) {
         VBox root = new VBox();//Create a vertical box layout.
@@ -44,73 +42,7 @@ public class ApplicationView extends Application {
         UserInput userInput = new UserInput(inputTextField.getText(), precisionModeComboBox.getValue());
         Calculator calculator = new Calculator(userInput);
         UserOutput userOutput = calculator.calculateUserOutput();
-        boolean sign = false;
-        BitSet exponent = null;
-        BitSet mantissa = null;
-        boolean isSpecial = false;
-        int numberOfExponentBits = 0;
-        int numberOfMantissaBits = 0;
         String outputString = "";
-        NumberType numberType = null;
-        PrecisionMode precisionMode = userInput.getPrecisionMode();
-        String numberString = "";
-
-        switch (precisionMode) {
-            case SIMPLE: {
-                numberOfExponentBits = 8;
-                numberOfMantissaBits = 23;
-                break;
-            }
-            case DOUBLE: {
-                numberOfExponentBits = 11;
-                numberOfMantissaBits = 52;
-                break;
-            }
-        }
-
-        if (userOutput == null) {
-            outputString = "An error occurred: userOutput is null.\n";
-        } else {
-            sign = userOutput.getSign();
-            exponent = userOutput.getExponent();
-            mantissa = userOutput.getMantissa();
-            isSpecial = userOutput.isSpecial();
-            if (isSpecial) {
-                outputString = "The given input is a special case. Read your lecture notes in order to understand this result.\n";
-            } else {
-                outputString = "The input isn't a special case. We proceed with calculations.\n";
-                numberType = userOutput.getNumberType();//As it isn't a special case, the number could be in normalized area or in denormalized area.
-                numberString = userOutput.getNumber();//The number is saved as string.
-                switch (numberType) {
-                    case NORMALIZED: {
-                        outputString += "The input representation is in normalized area.\n";
-                        outputString += "V(X) = " + numberString + " = 1,M • 2\n";
-                        break;
-                    }
-                    case DENORMALIZED: {
-                        outputString += "The input representation is in denormalized area.\n";
-                        break;
-                    }
-                }
-            }
-
-            outputString += "Result:\n";
-            outputString += "S: ";
-            outputString += sign ? "1" : "0";
-            outputString += "\n";
-            //Don't use BitSet.length(), use your own variables. Source: https://stackoverflow.com/questions/40786466/how-get-real-length-of-bitset
-            outputString += "E: ";
-            for (int i = 0; i < numberOfExponentBits; i++) {
-                outputString += exponent.get(i) ? "1" : "0";
-            }
-            outputString += "\n";
-            outputString += "M: ";
-            for (int i = 0; i < numberOfMantissaBits; i++) {
-                outputString += mantissa.get(i) ? "1" : "0";
-            }
-            outputString += "\n";
-        }
-
         outputTextArea.setText(outputString);
     }
 
