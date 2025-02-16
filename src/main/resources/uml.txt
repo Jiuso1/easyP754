@@ -25,6 +25,7 @@ class UserOutput {
     - final boolean isSpecial
     - final NumberType numberType
     - final int excess
+    - final int excessMinusOne
     - final BigDecimal number
     - final BigDecimal decimalY
     - final int y
@@ -40,6 +41,7 @@ class UserOutput {
     + boolean isSpecial()
     + NumberType getNumberType()
     + int getExcess()
+    + int getExcessMinusOne()
     + BigDecimal getNumber()
     + BigDecimal getDecimalY()
     + int getY()

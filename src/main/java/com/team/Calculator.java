@@ -49,7 +49,7 @@ public class Calculator {
             smallestNormalizedNumber = BigDecimalMath.pow(BigDecimal.valueOf(2), BigDecimal.valueOf(1 - excess), mathContext);//BigDecimal.valueOf(Math.pow(2, 1 - excess));
 
             if (number.compareTo(smallestNormalizedNumber) >= 0) {//If the user input number is equal or bigger than the smallest normalized number:
-                userOutput = calculateNormalizedCase();//The number is in normalXized area.
+                userOutput = calculateNormalizedCase();//The number is in normalized area.
             } else {//If the user input is smaller than the smallest normalized number:
                 userOutput = calculateDenormalizedCase();//The number is in denormalized area.
             }

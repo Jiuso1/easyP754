@@ -8,6 +8,7 @@ public class UserOutput {
     private final boolean isSpecial;
     private final NumberType numberType;
     private final int excess;
+    private final int excessMinusOne;
     private final BigDecimal number;
     private final BigDecimal decimalY;
     private final int y;
@@ -20,10 +21,11 @@ public class UserOutput {
     private final BitSet exponent;
     private final BitSet mantissa;
 
-    public UserOutput(boolean isSpecial, NumberType numberType, int excess, BigDecimal number, BigDecimal decimalY, int y, int integerExponent, int twoRaisedToY, BigDecimal x, ArrayList<BigDecimal> operand, ArrayList<BigDecimal> result, boolean sign, BitSet exponent, BitSet mantissa) {
+    public UserOutput(boolean isSpecial, NumberType numberType, int excess, int excessMinusOne, BigDecimal number, BigDecimal decimalY, int y, int integerExponent, int twoRaisedToY, BigDecimal x, ArrayList<BigDecimal> operand, ArrayList<BigDecimal> result, boolean sign, BitSet exponent, BitSet mantissa) {
         this.isSpecial = isSpecial;
         this.numberType = numberType;
         this.excess = excess;
+        this.excessMinusOne = excessMinusOne;
         this.number = number;
         this.decimalY = decimalY;
         this.y = y;
@@ -47,6 +49,10 @@ public class UserOutput {
 
     public int getExcess() {
         return excess;
+    }
+
+    public int getExcessMinusOne() {
+        return excessMinusOne;
     }
 
     public BigDecimal getNumber() {
