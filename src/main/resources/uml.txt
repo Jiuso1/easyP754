@@ -22,11 +22,30 @@ class UserInput {
 }
 
 class UserOutput {
+    - final PrecisionMode precisionMode
     - final boolean isSpecial
     - final NumberType numberType
+    - final BigDecimal number
+    - final Calculation calculation
+    - final boolean sign
+    - final BitSet exponent
+    - final BitSet mantissa
+    + UserOutput(...)
+    + PrecisionMode getPrecisionMode()
+    + boolean isSpecial()
+    + NumberType getNumberType()
+    + BigDecimal getNumber()
+    + Calculation getCalculation()
+    + boolean getSign()
+    + BitSet getExponent()
+    + BitSet getMantissa()
+}
+
+note bottom of UserOutput: Constructor receives all attributes.
+
+class Calculation{
     - final int excess
     - final int excessMinusOne
-    - final BigDecimal number
     - final BigDecimal decimalY
     - final int y
     - final int integerExponent
@@ -34,15 +53,9 @@ class UserOutput {
     - final BigDecimal x
     - final ArrayList<BigDecimal> operand
     - final ArrayList<BigDecimal> result
-    - final boolean sign
-    - final BitSet exponent
-    - final BitSet mantissa
-    + UserOutput(...)
-    + boolean isSpecial()
-    + NumberType getNumberType()
+    + Calculation(...)
     + int getExcess()
     + int getExcessMinusOne()
-    + BigDecimal getNumber()
     + BigDecimal getDecimalY()
     + int getY()
     + int getIntegerExponent()
@@ -50,12 +63,9 @@ class UserOutput {
     + BigDecimal getX()
     + ArrayList<BigDecimal> getOperand()
     + ArrayList<BigDecimal> getResult()
-    + boolean getSign()
-    + BitSet getExponent()
-    + BitSet getMantissa()
 }
 
-note bottom of UserOutput : UserOutput constructor receives all attributes.
+note bottom of Calculation: Constructor receives all attributes.
 
 class Calculator {
     - UserInput userInput

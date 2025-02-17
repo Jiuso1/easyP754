@@ -60,14 +60,14 @@ public class Calculator {
 
     public UserOutput calculateSpecialCase() {
         UserOutput userOutput = null;
+        PrecisionMode precisionMode = userInput.getPrecisionMode();
+        String text = userInput.getText();
         boolean sign = false;
         BitSet exponent = null;
         BitSet mantissa = null;
-        boolean isSpecial = userInput.isSpecial();
         int numberOfExponentBits = 0;
         int numberOfMantissaBits = 0;
-        PrecisionMode precisionMode = userInput.getPrecisionMode();
-        String text = userInput.getText();
+        boolean match = false;//Values true if text has matched a special case.
 
         switch (precisionMode) {
             case SIMPLE: {
@@ -129,6 +129,12 @@ public class Calculator {
                 }
                 break;
             }
+        }
+
+        match = (exponent != null) && (mantissa != null);//If exponent and mantissa have been calculated, text has matched a special case.
+
+        if (match) {
+            userOutput = new UserOutput(precisionMode, true, null, null, null, sign, exponent, mantissa);
         }
 
         return userOutput;
