@@ -42,18 +42,18 @@ public class Calculator {
                     break;
                 }
                 case DOUBLE: {
-                    excess = 1022;
+                    excess = 1023;
                     break;
                 }
             }
 
-            number = userInput.getNumber();
-            smallestNormalizedNumber = BigDecimalMath.pow(BigDecimal.valueOf(2), BigDecimal.valueOf(1 - excess), mathContext);//BigDecimal.valueOf(Math.pow(2, 1 - excess));
+            number = userInput.getNumber().abs();//number values the absolute value of the user input. Negative sign is ignored.
+            smallestNormalizedNumber = BigDecimalMath.pow(BigDecimal.valueOf(2), BigDecimal.valueOf(1 - excess), mathContext);//The smallest positive normalized number is calculated.
 
-            if (number.compareTo(smallestNormalizedNumber) >= 0) {//If the user input number is equal or bigger than the smallest normalized number:
-                userOutput = calculateNormalizedCase();//The number is in normalized area.
-            } else {//If the user input is smaller than the smallest normalized number:
-                userOutput = calculateDenormalizedCase();//The number is in denormalized area.
+            if (number.compareTo(smallestNormalizedNumber) >= 0) {//If number is equal or bigger than the smallest normalized number:
+                userOutput = calculateNormalizedCase();//This number is in normalized area.
+            } else {//If number is smaller than the smallest normalized number:
+                userOutput = calculateDenormalizedCase();//This number is in denormalized area.
             }
         }
 
@@ -169,6 +169,11 @@ public class Calculator {
         BigDecimal currentResult = null;
         BitSet flippedExponent = null;//Flipped exponent due to long[] to BitSet conversion. When this flippedExponent is flipped, the result is exponent.
 
+        if (number.compareTo(BigDecimal.ZERO) < 0) {//If number is negative:
+            sign = true;//Sign values 1.
+            number = number.abs();//Number updates with the absolute value.
+        }
+
         switch (precisionMode) {
             case SIMPLE: {
                 numberOfExponentBits = 8;
@@ -179,7 +184,7 @@ public class Calculator {
             case DOUBLE: {
                 numberOfExponentBits = 11;
                 numberOfMantissaBits = 52;
-                excess = 1022;
+                excess = 1023;
                 break;
             }
         }
@@ -193,7 +198,6 @@ public class Calculator {
         decimalY = BigDecimalMath.log2(number, mathContext);//log_2(number) is assigned to decimalY.
         y = decimalY.setScale(0, RoundingMode.DOWN).intValue();//decimalY is rounded down and cast to int. Source: https://stackoverflow.com/questions/4134047/java-bigdecimal-round-to-the-nearest-whole-value
         integerExponent = y + excess;
-        System.out.println("integerExponent: " + integerExponent);
         flippedExponent = BitSet.valueOf(new long[]{integerExponent});//int to BitSet conversion. Source: https://stackoverflow.com/questions/11820402/convert-a-byte-or-int-to-bitset
         //flippedExponent contains the reverse version of exponent BitSet.
         for (int i = 0; i < numberOfExponentBits; i++) {//For all exponent bits:
@@ -219,7 +223,7 @@ public class Calculator {
             currentOperandIterator++;//Iterator increments.
         } while ((currentResult.compareTo(one) != 0) && (currentOperandIterator < numberOfMantissaBits));//...while result doesn't equal 1 or not all bits have been calculated.
 
-        //calculation = new Calculation(excess, excess - 1, );
+        calculation = new Calculation(excess, excess - 1, decimalY, y, integerExponent, twoRaisedToY, x, operand, result);
 
         userOutput = new UserOutput(precisionMode, false, NORMALIZED, number, calculation, sign, exponent, mantissa);
 
