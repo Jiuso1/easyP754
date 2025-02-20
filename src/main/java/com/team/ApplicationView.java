@@ -90,6 +90,8 @@ public class ApplicationView extends Application {
             outputString += "Result:\n";
             outputString += "Sign: " + (sign ? "1" : "0") + "\n";
             outputString += "Exponent: ";
+
+            //Don't use BitSet.length(), use your own variables. Source: https://stackoverflow.com/questions/40786466/how-get-real-length-of-bitset
             for (int i = 0; i < numberOfExponentBits; i++) {//All exponent bits are set to 0:
                 outputString += exponent.get(i) ? "1" : "0";
             }
