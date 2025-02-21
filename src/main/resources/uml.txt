@@ -49,7 +49,7 @@ class Calculation{
     - final BigDecimal decimalY
     - final int y
     - final int integerExponent
-    - final int twoRaisedToY
+    - final BigDecimal   twoRaisedToY
     - final BigDecimal x
     - final ArrayList<BigDecimal> operand
     - final ArrayList<BigDecimal> result
@@ -59,7 +59,7 @@ class Calculation{
     + BigDecimal getDecimalY()
     + int getY()
     + int getIntegerExponent()
-    + int getTwoRaisedToY()
+    + BigDecimal getTwoRaisedToY()
     + BigDecimal getX()
     + ArrayList<BigDecimal> getOperand()
     + ArrayList<BigDecimal> getResult()

@@ -157,7 +157,7 @@ public class Calculator {
         BigDecimal decimalY = null;
         int y = 0;
         int integerExponent = 0;
-        int twoRaisedToY = 0;
+        BigDecimal twoRaisedToY = null;
         BigDecimal x = null;
         BigDecimal integerPart = null;
         BigDecimal currentOperand = null;
@@ -201,8 +201,8 @@ public class Calculator {
         for (int i = 0; i < numberOfExponentBits; i++) {//For all exponent bits:
             exponent.set((numberOfExponentBits - 1) - i, flippedExponent.get(i));//exponent bits are set by turning flippedExponent around.
         }
-        twoRaisedToY = (int) Math.pow(2, y);//Calculates 2^y and the result is cast to int.
-        x = number.divide(new BigDecimal(twoRaisedToY));//Calculates number/twoRaisedToY. As twoRaisedToY is int, BigDecimal casting is required.
+        twoRaisedToY = new BigDecimal(Math.pow(2, y));//Calculates 2^y..
+        x = number.divide(twoRaisedToY);//Calculates number/twoRaisedToY.
         integerPart = x.setScale(0, RoundingMode.DOWN);//integerPart is extracted from x. Source: https://codingtechroom.com/question/extract-decimal-from-bigdecimal-java
         currentOperand = x.subtract(integerPart);//The first operand is x minus its integer part.
 

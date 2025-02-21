@@ -9,12 +9,12 @@ public class Calculation {
     private final BigDecimal decimalY;
     private final int y;
     private final int integerExponent;
-    private final int twoRaisedToY;
+    private final BigDecimal twoRaisedToY;
     private final BigDecimal x;
     private final ArrayList<BigDecimal> operand;
     private final ArrayList<BigDecimal> result;
 
-    public Calculation(int excess, int excessMinusOne, BigDecimal decimalY, int y, int integerExponent, int twoRaisedToY, BigDecimal x, ArrayList<BigDecimal> operand, ArrayList<BigDecimal> result) {
+    public Calculation(int excess, int excessMinusOne, BigDecimal decimalY, int y, int integerExponent, BigDecimal twoRaisedToY, BigDecimal x, ArrayList<BigDecimal> operand, ArrayList<BigDecimal> result) {
         this.excess = excess;
         this.excessMinusOne = excessMinusOne;
         this.decimalY = decimalY;
@@ -46,7 +46,7 @@ public class Calculation {
         return integerExponent;
     }
 
-    public int getTwoRaisedToY() {
+    public BigDecimal getTwoRaisedToY() {
         return twoRaisedToY;
     }
 
