@@ -13,10 +13,10 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/team/Calculator.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/team/Calculator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Calculator.class.uniqueId0" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Calculator.class.uniqueId0" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/team/Calculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/team/Calculator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/team/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/team/MainApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/team/UserOutput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/team/UserOutput.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/uml.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/uml.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,8 +97,8 @@
   }
 }</component>
   <component name="RunManager" selected="Application.Main">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.team.Main" />
+    <configuration name="ApplicationView" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.team.ApplicationView" />
       <module name="easyP754.main" />
       <extension name="coverage">
         <pattern>
@@ -110,8 +110,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MainApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.team.MainApplication" />
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.team.Main" />
       <module name="easyP754.main" />
       <extension name="coverage">
         <pattern>
@@ -179,7 +179,7 @@
       <list>
         <item itemvalue="Application.OldMain" />
         <item itemvalue="Application.Main" />
-        <item itemvalue="Application.MainApplication" />
+        <item itemvalue="Application.ApplicationView" />
         <item itemvalue="Application.Test" />
         <item itemvalue="Application.QMain" />
       </list>
@@ -188,8 +188,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.23654.189" />
-        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-IU-243.23654.189" />
+        <option value="bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.24978.46" />
+        <option value="bundled-js-predefined-d6986cc7102b-76f8388c3a79-JavaScript-IU-243.24978.46" />
       </set>
     </attachedChunks>
   </component>
@@ -253,6 +253,37 @@
       <workItem from="1738449045110" duration="370000" />
       <workItem from="1738499571050" duration="65000" />
       <workItem from="1738540848511" duration="4647000" />
+      <workItem from="1738675405549" duration="4095000" />
+      <workItem from="1738694736076" duration="1221000" />
+      <workItem from="1738762157772" duration="418000" />
+      <workItem from="1738781711034" duration="109000" />
+      <workItem from="1738926161133" duration="1826000" />
+      <workItem from="1738959187432" duration="5000" />
+      <workItem from="1739100607353" duration="4895000" />
+      <workItem from="1739113309636" duration="2466000" />
+      <workItem from="1739189772945" duration="1951000" />
+      <workItem from="1739202311717" duration="3002000" />
+      <workItem from="1739217353105" duration="2633000" />
+      <workItem from="1739379031066" duration="1979000" />
+      <workItem from="1739387669248" duration="1721000" />
+      <workItem from="1739390457327" duration="1618000" />
+      <workItem from="1739728764579" duration="2117000" />
+      <workItem from="1739731849416" duration="6837000" />
+      <workItem from="1739805618262" duration="608000" />
+      <workItem from="1739811322020" duration="59000" />
+      <workItem from="1739811599818" duration="2826000" />
+      <workItem from="1739828328986" duration="3583000" />
+      <workItem from="1739875163420" duration="340000" />
+      <workItem from="1739919489507" duration="5219000" />
+      <workItem from="1739957271024" duration="1358000" />
+      <workItem from="1739961527147" duration="5139000" />
+      <workItem from="1740046883940" duration="6517000" />
+      <workItem from="1740058782935" duration="783000" />
+      <workItem from="1740060507890" duration="702000" />
+      <workItem from="1740061309030" duration="559000" />
+      <workItem from="1740070637327" duration="1513000" />
+      <workItem from="1740137807254" duration="2128000" />
+      <workItem from="1740247839093" duration="583000" />
     </task>
     <servers />
   </component>
