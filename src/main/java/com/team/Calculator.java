@@ -8,7 +8,6 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.BitSet;
 
-import static com.team.NumberType.DENORMALIZED;
 import static com.team.NumberType.NORMALIZED;
 
 public class Calculator {
@@ -133,7 +132,7 @@ public class Calculator {
             }
         }
 
-        match = (exponent != null) && (mantissa != null);//If exponent and mantissa have been calculated, text has matched a special case.
+        match = (exponent != null);//If exponent is not null, match values true.
 
         if (match) {
             userOutput = new UserOutput(precisionMode, true, null, null, null, sign, exponent, mantissa);
@@ -143,7 +142,7 @@ public class Calculator {
     }
 
     public UserOutput calculateNormalizedCase() {
-        UserOutput userOutput = null;
+        UserOutput userOutput = null;//Object that saves all output.
         BigDecimal number = userInput.getNumber();
         boolean sign = false;
         BitSet exponent = null;
@@ -187,9 +186,8 @@ public class Calculator {
             }
         }
 
-        //Memory is reserved to all BitSet. Constructor specifies the number of bits:
+        //Memory is reserved to exponent and mantissa. Constructor specifies the number of bits:
         exponent = new BitSet(numberOfExponentBits);
-        flippedExponent = new BitSet(numberOfExponentBits);
         mantissa = new BitSet(numberOfMantissaBits);
 
         //Calculation data is calculated and saved in calculation object:
@@ -202,7 +200,7 @@ public class Calculator {
             exponent.set((numberOfExponentBits - 1) - i, flippedExponent.get(i));//exponent bits are set by turning flippedExponent around.
         }
         twoRaisedToY = BigDecimalMath.pow(BigDecimal.TWO, new BigDecimal(y), mathContext);//Calculates 2^y.
-        x = number.divide(twoRaisedToY);//Calculates number/twoRaisedToY.
+        x = number.divide(twoRaisedToY, mathContext);//Calculates number/twoRaisedToY.
         integerPart = x.setScale(0, RoundingMode.DOWN);//integerPart is extracted from x. Source: https://codingtechroom.com/question/extract-decimal-from-bigdecimal-java
         currentOperand = x.subtract(integerPart);//The first operand is x minus its integer part.
 
@@ -229,8 +227,35 @@ public class Calculator {
     }
 
     public UserOutput calculateDenormalizedCase() {
-        UserOutput userOutput = null;
-        NumberType numberType = DENORMALIZED;//The number representation is in denormalized area.
+        BigDecimal number = userInput.getNumber();
+        PrecisionMode precisionMode = userInput.getPrecisionMode();
+        int numberOfExponentBits = 0;
+        int numberOfMantissaBits = 0;
+        int excess = 0;
+        BigDecimal x = null;
+        BigDecimal twoRaisedToMinusExponentMinusOne = null;
+        UserOutput userOutput = null;//Object that saves all output.
+        Calculation calculation = null;//Object that saves all calculation data.
+
+        switch (precisionMode) {
+            case SIMPLE: {
+                numberOfExponentBits = 8;
+                numberOfMantissaBits = 23;
+                excess = 127;
+                break;
+            }
+            case DOUBLE: {
+                numberOfExponentBits = 11;
+                numberOfMantissaBits = 52;
+                excess = 1023;
+                break;
+            }
+        }
+
+        twoRaisedToMinusExponentMinusOne = BigDecimalMath.pow(BigDecimal.TWO, -(excess - 1), mathContext);
+        x = number.divide(twoRaisedToMinusExponentMinusOne, mathContext);
+        System.out.println(x);
+
         return userOutput;
     }
 
