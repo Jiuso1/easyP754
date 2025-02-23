@@ -42,10 +42,10 @@ public class ApplicationView extends Application {
         UserInput userInput = new UserInput(inputTextField.getText(), precisionModeComboBox.getValue());
         Calculator calculator = new Calculator(userInput);
         UserOutput userOutput = calculator.calculateUserOutput();
-        Calculation calculation = null;
         String outputString = "";
         int numberOfExponentBits = 0;
         int numberOfMantissaBits = 0;
+        int operandSize = 0;//Number of operands in operand ArrayList (which is equal to the number of results in result ArrayList).
 
         if (userOutput == null) {
             outputString = "userOutput is null.\n";
@@ -63,21 +63,39 @@ public class ApplicationView extends Application {
                     break;
                 }
             }
-            //Calculation operations are received from userOutput object:
-            calculation = userOutput.getCalculation();
+
             if (userOutput.isSpecial()) {
                 outputString += "userOutput is special.\n";
             } else {
                 outputString += "userOutput is not special.\n";
                 outputString += "V(X) = (-1)^S • 1,M • 2^(E-EXCESS)\n";
-                outputString += "V(X) = (-1)^0 • 1,0 • 2^(1-" + calculation.getExcess() + ")\n";
-                outputString += "V(X) = 2^(-" + calculation.getExcessMinusOne() + ")\n";
+                outputString += "V(X) = (-1)^0 • 1,0 • 2^(1-" + userOutput.getCalculation().getExcess() + ")\n";
+                outputString += "V(X) = 2^(-" + userOutput.getCalculation().getExcessMinusOne() + ")\n";
 
-                switch (userOutput.getNumberType()) {
+                switch (userOutput.getNumberType()) {//Depending on numberType we print all calculations:
                     case NORMALIZED: {
-                        outputString += "|" + userOutput.getNumber() + "| = " + userOutput.getNumber().abs() + " ≥ 2^(-" + calculation.getExcessMinusOne() + ")\n";
+                        outputString += "Using |" + userOutput.getNumber() + "|, changing sign bit if needed.\n";
+                        outputString += userOutput.getNumber().abs() + " ≥ 2^(-" + userOutput.getCalculation().getExcessMinusOne() + ")\n";
                         outputString += "userOutput is normalized.\n";
-                        //outputString += "V(X) = " + userOutput.getNumber().abs() + " = 1,M • 2^(E-" + calculation.getExcess() + ")\n";
+                        outputString += "V(X) = " + userOutput.getNumber().abs() + " = 1,M • 2^(E-" + userOutput.getCalculation().getExcess() + ")\n";
+                        outputString += "X = 1,M ; 1 ≤ X < 2\n";
+                        outputString += "Y = E - " + userOutput.getCalculation().getExcess() + " ; Y ∈ ℤ\n";
+                        outputString += "X = 1,0\n";
+                        outputString += userOutput.getNumber().abs() + " = 1,0 • 2^Y'\n";
+                        outputString += userOutput.getNumber().abs() + " = 2^Y'\n";
+                        outputString += "log_2(" + userOutput.getNumber() + ") = Y'\n";
+                        outputString += "Y' = " + userOutput.getCalculation().getDecimalY() + "\n";
+                        outputString += "Y = " + userOutput.getCalculation().getY() + "\n";
+                        outputString += "Y = E - " + userOutput.getCalculation().getExcess() + "\n";
+                        outputString += userOutput.getCalculation().getY() + " = E - " + userOutput.getCalculation().getExcess() + "\n";
+                        outputString += "E = " + userOutput.getCalculation().getIntegerExponent() + "\n";
+                        outputString += "V(X) = " + userOutput.getNumber().abs() + " = X • 2^" + userOutput.getCalculation().getY() + "\n";
+                        outputString += "X = " + userOutput.getNumber().abs() + " ÷ " + userOutput.getCalculation().getTwoRaisedToY() + "\n";
+                        outputString += "X = " + userOutput.getCalculation().getX() + "\n";
+                        operandSize = userOutput.getCalculation().getOperand().size();
+                        for (int i = 0; i < operandSize; i++) {
+                            outputString += userOutput.getCalculation().getOperand().get(i) + " • 2 = " + userOutput.getCalculation().getResult().get(i) + "\n";
+                        }
                         break;
                     }
                     case DENORMALIZED: {
