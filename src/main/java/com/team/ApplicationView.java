@@ -14,8 +14,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-import java.util.BitSet;
-
 public class ApplicationView extends Application {
     public void start(Stage primaryStage) {
         VBox root = new VBox();//Create a vertical box layout.
@@ -44,18 +42,15 @@ public class ApplicationView extends Application {
         UserInput userInput = new UserInput(inputTextField.getText(), precisionModeComboBox.getValue());
         Calculator calculator = new Calculator(userInput);
         UserOutput userOutput = calculator.calculateUserOutput();
+        Calculation calculation = null;
         String outputString = "";
         int numberOfExponentBits = 0;
         int numberOfMantissaBits = 0;
-        //Solutiom:
-        boolean sign = false;
-        BitSet exponent = null;
-        BitSet mantissa = null;
 
         if (userOutput == null) {
-            outputString = "userOutput is null\n";
+            outputString = "userOutput is null.\n";
         } else {
-            outputString = "userOutput is not null\n";
+            outputString = "userOutput is not null.\n";
             switch (userOutput.getPrecisionMode()) {
                 case SIMPLE: {
                     numberOfExponentBits = 8;
@@ -68,37 +63,40 @@ public class ApplicationView extends Application {
                     break;
                 }
             }
-            //Solution is saved onto variables:
-            sign = userOutput.getSign();
-            exponent = userOutput.getExponent();
-            mantissa = userOutput.getMantissa();
+            //Calculation operations are received from userOutput object:
+            calculation = userOutput.getCalculation();
             if (userOutput.isSpecial()) {
-                outputString += "userOutput is special\n";
+                outputString += "userOutput is special.\n";
             } else {
-                outputString += "userOutput is not special\n";
+                outputString += "userOutput is not special.\n";
+                outputString += "V(X) = (-1)^S • 1,M • 2^(E-EXCESS)\n";
+                outputString += "V(X) = (-1)^0 • 1,0 • 2^(1-" + calculation.getExcess() + ")\n";
+                outputString += "V(X) = 2^(-" + calculation.getExcessMinusOne() + ")\n";
+
                 switch (userOutput.getNumberType()) {
                     case NORMALIZED: {
-                        outputString = "userOutput is normalized\n";
+                        outputString += "|" + userOutput.getNumber() + "| = " + userOutput.getNumber().abs() + " ≥ 2^(-" + calculation.getExcessMinusOne() + ")\n";
+                        outputString += "userOutput is normalized.\n";
+                        //outputString += "V(X) = " + userOutput.getNumber().abs() + " = 1,M • 2^(E-" + calculation.getExcess() + ")\n";
                         break;
                     }
                     case DENORMALIZED: {
-                        outputString = "userOutput is denormalized\n";
+                        outputString += "userOutput is denormalized.\n";
                         break;
                     }
                 }
             }
-            outputString += "Result:\n";
-            outputString += "Sign: " + (sign ? "1" : "0") + "\n";
+            outputString += "Sign: " + (userOutput.getSign() ? "1" : "0") + "\n";
             outputString += "Exponent: ";
 
             //Don't use BitSet.length(), use your own variables. Source: https://stackoverflow.com/questions/40786466/how-get-real-length-of-bitset
             for (int i = 0; i < numberOfExponentBits; i++) {//All exponent bits are set to 0:
-                outputString += exponent.get(i) ? "1" : "0";
+                outputString += userOutput.getExponent().get(i) ? "1" : "0";
             }
             outputString += "\n";
             outputString += "Mantissa: ";
             for (int i = 0; i < numberOfMantissaBits; i++) {//All mantissa bits are set to 0:
-                outputString += mantissa.get(i) ? "1" : "0";
+                outputString += userOutput.getMantissa().get(i) ? "1" : "0";
             }
             outputString += "\n";
         }

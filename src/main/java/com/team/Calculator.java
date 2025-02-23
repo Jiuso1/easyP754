@@ -221,6 +221,10 @@ public class Calculator {
 
         calculation = new Calculation(excess, excess - 1, decimalY, y, integerExponent, twoRaisedToY, x, operand, result);
 
+        if (sign == true) {//If sign values true:
+            number = number.negate();//number updates with the original value, negating the absolute value.
+        }
+
         userOutput = new UserOutput(precisionMode, false, NORMALIZED, number, calculation, sign, exponent, mantissa);
 
         return userOutput;
@@ -254,7 +258,6 @@ public class Calculator {
 
         twoRaisedToMinusExponentMinusOne = BigDecimalMath.pow(BigDecimal.TWO, -(excess - 1), mathContext);
         x = number.divide(twoRaisedToMinusExponentMinusOne, mathContext);
-        System.out.println(x);
 
         return userOutput;
     }
