@@ -83,7 +83,7 @@ public class ApplicationView extends Application {
                         outputString += "X = 1,0\n";
                         outputString += userOutput.getNumber().abs() + " = 1,0 • 2^Y'\n";
                         outputString += userOutput.getNumber().abs() + " = 2^Y'\n";
-                        outputString += "log_2(" + userOutput.getNumber() + ") = Y'\n";
+                        outputString += "log_2(" + userOutput.getNumber().abs() + ") = Y'\n";
                         outputString += "Y' = " + userOutput.getCalculation().getDecimalY() + "\n";
                         outputString += "Y = " + userOutput.getCalculation().getY() + "\n";
                         outputString += "Y = E - " + userOutput.getCalculation().getExcess() + "\n";
