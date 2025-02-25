@@ -16,7 +16,7 @@ public class Calculator {
 
     public Calculator() {
         userInput = null;
-        mathContext = new MathContext(100);//100 digit precision.
+        mathContext = new MathContext(1000);//1000 digit precision.
     }
 
     public Calculator(UserInput userInput) {
@@ -193,6 +193,9 @@ public class Calculator {
         //Calculation data is calculated and saved in calculation object:
         decimalY = BigDecimalMath.log2(number, mathContext);//log_2(number) is assigned to decimalY.
         y = decimalY.setScale(0, RoundingMode.DOWN).intValue();//decimalY is rounded down and cast to int. Source: https://stackoverflow.com/questions/4134047/java-bigdecimal-round-to-the-nearest-whole-value
+        if (y < 0) {//If y is negative:
+            y--;//y is decremented in order to represent the correct rounding to the smallest and nearest decimalY value.
+        }
         integerExponent = y + excess;
         flippedExponent = BitSet.valueOf(new long[]{integerExponent});//int to BitSet conversion. Source: https://stackoverflow.com/questions/11820402/convert-a-byte-or-int-to-bitset
         //flippedExponent contains the reverse version of exponent BitSet.
