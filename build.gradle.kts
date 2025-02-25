@@ -1,6 +1,7 @@
 plugins {
     id("java")
     id("org.openjfx.javafxplugin") version "0.1.0"
+    application //Source: https://docs.gradle.org/current/userguide/application_plugin.html#sec:application_usage
 }
 
 javafx {
@@ -24,3 +25,8 @@ dependencies {
 tasks.test {
     useJUnitPlatform()
 }
+
+application {
+    mainClass = "com.team.Main"
+}
+
