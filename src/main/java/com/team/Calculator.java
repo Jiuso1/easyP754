@@ -260,6 +260,7 @@ public class Calculator {
         }
 
         twoRaisedToMinusExponentMinusOne = BigDecimalMath.pow(BigDecimal.TWO, -(excess - 1), mathContext);
+        System.out.println(BigDecimal.TWO + "^" + -(excess - 1));
         x = number.divide(twoRaisedToMinusExponentMinusOne, mathContext);
 
         return userOutput;
