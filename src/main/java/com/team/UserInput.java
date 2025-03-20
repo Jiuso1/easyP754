@@ -24,7 +24,7 @@ public class UserInput {
         try {
             if (this.text.contains("^")) {//If text contains '^':
                 exponentSymbolIndex = text.indexOf('^');//Index where '^' places is stored.
-                //Given a^b, a is the previous number to ^ and b is the next number to ^:
+                //Given a^b, a is the previous number to '^' and b is the next number to '^':
                 base = new BigDecimal(text.substring(0, exponentSymbolIndex));
                 exponent = new BigDecimal(text.substring(exponentSymbolIndex + 1));
                 number = BigDecimalMath.pow(base, exponent, mathContext);//We try to get a BigDecimal calculating a^b.

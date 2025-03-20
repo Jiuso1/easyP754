@@ -193,7 +193,7 @@ public class Calculator {
         //Calculation data is calculated and saved in calculation object:
         decimalY = BigDecimalMath.log2(number, mathContext);//log_2(number) is assigned to decimalY.
         y = decimalY.setScale(0, RoundingMode.DOWN).intValue();//decimalY is rounded down and cast to int. Source: https://stackoverflow.com/questions/4134047/java-bigdecimal-round-to-the-nearest-whole-value
-        if (y < 0) {//If y is negative:
+        if ((y < 0) && (decimalY.subtract(new BigDecimal(y)).compareTo(BigDecimal.ZERO) != 0)) {//If y is negative and decimalY has decimals:
             y--;//y is decremented in order to represent the correct rounding to the smallest and nearest decimalY value.
         }
         integerExponent = y + excess;
