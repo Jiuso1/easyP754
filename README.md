@@ -1,8 +1,14 @@
 # easyP754
 
+![easyP754 output for 3.1415](src/main/resources/demo.png)
+
 ### What it is
 
 A JavaFX app that shows the IEEE P754 representation of the number entered. All calculations done are shown.
+
+### Class diagram
+
+![easyP754 output for 3.1415](src/main/resources/uml.png)
 
 ### Project acknowledgments
 
@@ -22,3 +28,7 @@ also thank him for being so
 kind.
 
 In summary, I dedicate this application to Borja wherever he is.
+
+### Personal acknowledgments
+
+Thanks to all my friends and family. Without their support this app couldn't exist.

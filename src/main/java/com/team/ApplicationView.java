@@ -35,6 +35,7 @@ public class ApplicationView extends Application {
         root.getChildren().addAll(hBox, outputTextArea);//Add hBox and output as children of root.
         Scene scene = new Scene(root, 1000, 600);//Create a scene specifying root and window size.
         primaryStage.setScene(scene);//Add scene to the stage.
+        primaryStage.setTitle("easyP754");//Set "easyP754" as window's title.
         primaryStage.show();//Make the stage visible.
     }
 
