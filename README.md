@@ -8,7 +8,7 @@ A JavaFX app that shows the IEEE P754 representation of the number entered. All 
 
 ### Class diagram
 
-![easyP754 output for 3.1415](src/main/resources/uml.png)
+![Project class diagram](src/main/resources/uml.png)
 
 ### Project acknowledgments
 
