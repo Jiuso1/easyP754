@@ -8,7 +8,14 @@ A JavaFX app that shows the IEEE P754 representation of the number entered. All 
 
 ### Class diagram
 
-![Project class diagram](src/main/resources/uml.png)
+![Class diagram](src/main/resources/uml.png)
+
+### Tech used
+
+* IntelliJ IDEA.
+* Java.
+* JavaFX.
+* [big-math](https://github.com/eobermuhlner/big-math)
 
 ### Project acknowledgments
 
