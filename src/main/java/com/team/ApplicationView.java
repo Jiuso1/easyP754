@@ -72,10 +72,10 @@ public class ApplicationView extends Application {
                 outputString += "V(X) = (-1)^S • 1,M • 2^(E-EXCESS)\n";
                 outputString += "V(X) = (-1)^0 • 1,0 • 2^(1-" + userOutput.getCalculation().getExcess() + ")\n";
                 outputString += "V(X) = 2^(-" + userOutput.getCalculation().getExcessMinusOne() + ")\n";
+                outputString += "Using |" + userOutput.getNumber() + "|, changing sign bit if needed.\n";
 
                 switch (userOutput.getNumberType()) {//Depending on numberType we print all calculations:
                     case NORMALIZED: {
-                        outputString += "Using |" + userOutput.getNumber() + "|, changing sign bit if needed.\n";
                         outputString += userOutput.getNumber().abs() + " ≥ 2^(-" + userOutput.getCalculation().getExcessMinusOne() + ")\n";
                         outputString += "userOutput is normalized.\n";
                         outputString += "V(X) = " + userOutput.getNumber().abs() + " = 1,M • 2^(E-" + userOutput.getCalculation().getExcess() + ")\n";
@@ -100,7 +100,10 @@ public class ApplicationView extends Application {
                         break;
                     }
                     case DENORMALIZED: {
+                        outputString += userOutput.getNumber().abs() + " < 2^(-" + userOutput.getCalculation().getExcessMinusOne() + ")\n";
                         outputString += "userOutput is denormalized.\n";
+                        outputString += "V(X) = " + userOutput.getNumber().abs() + " = 0,M • 2^(E-" + userOutput.getCalculation().getExcess() + ")\n";
+                        outputString += "X = 0,M ; 0 ≤ X < 1\n";
                         break;
                     }
                 }

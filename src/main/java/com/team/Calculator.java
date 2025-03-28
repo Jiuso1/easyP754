@@ -8,6 +8,7 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.BitSet;
 
+import static com.team.NumberType.DENORMALIZED;
 import static com.team.NumberType.NORMALIZED;
 
 public class Calculator {
@@ -21,7 +22,7 @@ public class Calculator {
 
     public Calculator(UserInput userInput) {
         this.userInput = userInput;
-        mathContext = new MathContext(100);//100 digit precision.
+        mathContext = new MathContext(1000);//1000 digit precision.
     }
 
     public UserOutput calculateUserOutput() {
@@ -243,6 +244,15 @@ public class Calculator {
         BigDecimal twoRaisedToMinusExponentMinusOne = null;
         UserOutput userOutput = null;//Object that saves all output.
         Calculation calculation = null;//Object that saves all calculation data.
+        BigDecimal integerPart = null;
+        BigDecimal currentOperand = null;
+        int currentOperandIterator = 0;//Variable used to iterate all calculation operands.
+        ArrayList<BigDecimal> operand = new ArrayList<>();//Saves all calculated operands.
+        ArrayList<BigDecimal> result = new ArrayList<>();//Saves all calculated results.
+        BigDecimal currentResult = null;
+        BitSet exponent = null;
+        BitSet mantissa = null;
+        boolean sign = false;
 
         switch (precisionMode) {
             case SIMPLE: {
@@ -259,9 +269,49 @@ public class Calculator {
             }
         }
 
+        if (number.compareTo(BigDecimal.ZERO) < 0) {//If number is negative:
+            sign = true;//Sign values 1.
+            number = number.abs();//Number updates with the absolute value.
+        }
+
+        //Memory is reserved to exponent and mantissa. Constructor specifies the number of bits:
+        exponent = new BitSet(numberOfExponentBits);
+        mantissa = new BitSet(numberOfMantissaBits);
+
+        //Calculation data is calculated and saved in calculation object:
+
+        //Exponent is set to 0:
+        for (int i = 0; i < numberOfExponentBits; i++) {//All exponent bits are set to 0:
+            exponent.set(i, false);
+        }
+
         twoRaisedToMinusExponentMinusOne = BigDecimalMath.pow(BigDecimal.TWO, -(excess - 1), mathContext);
-        System.out.println(BigDecimal.TWO + "^" + -(excess - 1));
         x = number.divide(twoRaisedToMinusExponentMinusOne, mathContext);
+        integerPart = x.setScale(0, RoundingMode.DOWN);//integerPart is extracted from x. Source: https://codingtechroom.com/question/extract-decimal-from-bigdecimal-java
+        currentOperand = x.subtract(integerPart);//The first operand is x minus its integer part.
+
+        do {//Do...
+            currentResult = currentOperand.multiply(BigDecimal.TWO);//The result of each operating values its operand*2.
+            if (currentResult.compareTo(BigDecimal.ONE) >= 0) {//If the current result is equal to or bigger than 1:
+                mantissa.set(currentOperandIterator, true);//Mantissa bit values 1.
+            } else {
+                mantissa.set(currentOperandIterator, false);//Mantissa bit values 0.
+            }
+            //Both the operand and result of each operation are added to their list:
+            operand.add(currentOperand);
+            result.add(currentResult);
+            integerPart = currentResult.setScale(0, RoundingMode.DOWN);//integerPart is extracted from currentOperand. Source: https://codingtechroom.com/question/extract-decimal-from-bigdecimal-java
+            currentOperand = currentResult.subtract(integerPart);//The next operand is the previous result minus its integer part.
+            currentOperandIterator++;//Iterator increments.
+        } while ((currentResult.compareTo(BigDecimal.ONE) != 0) && (currentOperandIterator < numberOfMantissaBits));//...while result doesn't equal 1 or not all bits have been calculated.
+
+        calculation = new Calculation(excess, excess - 1, null, 0, 0, null, x, operand, result);
+
+        if (sign == true) {//If sign values true:
+            number = number.negate();//number updates with the original value, negating the absolute value.
+        }
+
+        userOutput = new UserOutput(precisionMode, false, DENORMALIZED, number, calculation, sign, exponent, mantissa);
 
         return userOutput;
     }

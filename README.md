@@ -12,9 +12,10 @@ A JavaFX app that shows the IEEE P754 representation of the number entered. All 
 
 ### Tech used
 
-* IntelliJ IDEA.
-* Java.
-* JavaFX.
+* [PlantUML](https://plantuml.com)
+* IntelliJ IDEA
+* Java
+* JavaFX
 * [big-math](https://github.com/eobermuhlner/big-math)
 
 ### Project acknowledgments
