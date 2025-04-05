@@ -19,13 +19,11 @@
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/team/Calculator$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/team/Calculator$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/team/Calculator.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/team/Calculator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ApplicationView$1.class.uniqueId2" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ApplicationView$1.class.uniqueId2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/team/ApplicationView.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/team/ApplicationView.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ApplicationView.class.uniqueId0" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ApplicationView.class.uniqueId0" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/team/ApplicationView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/team/ApplicationView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/team/Calculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/team/Calculator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/demo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/firstDemo.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -351,6 +349,14 @@
       <workItem from="1743021981206" duration="157000" />
       <workItem from="1743023031363" duration="2616000" />
       <workItem from="1743072253421" duration="2864000" />
+      <workItem from="1743344022542" duration="296000" />
+      <workItem from="1743441156229" duration="949000" />
+      <workItem from="1743495849368" duration="272000" />
+      <workItem from="1743542827381" duration="128000" />
+      <workItem from="1743617574940" duration="379000" />
+      <workItem from="1743849571426" duration="170000" />
+      <workItem from="1743867154475" duration="1421000" />
+      <workItem from="1743887977657" duration="3299000" />
     </task>
     <servers />
   </component>

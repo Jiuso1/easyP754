@@ -1,14 +1,49 @@
 # easyP754
 
-![easyP754 output for 3.1415](src/main/resources/demo.png)
+![easyP754 calculation output for 3.1415](src/main/resources/firstDemo.png)
+![easyP754 binary output for 3.1415](src/main/resources/secondDemo.png)
 
 ### What it is
 
-A JavaFX app that shows the IEEE P754 representation of the number entered. All calculations done are shown.
+A JavaFX app that shows the IEEE P754 representation of the number entered (in both single and double precision). All
+calculations done are shown. 1000
+decimals are used in almost every operation.
+
+### Input examples
+
+```text
+3.1416
+```
+
+```text
+-3.3254343
+```
+
+```text
+23E10
+```
+
+```text
+2^3
+```
+
+```text
+2^-127
+```
 
 ### Class diagram
 
+The class diagram has helped us a lot to create an organized and readable software for humans.
+[uml.txt](src/main/resources/uml.txt) has PlantUML code that generates the following class diagram.
+
 ![Class diagram](src/main/resources/uml.png)
+
+1. ApplicationView asks user a text input.
+2. UserInput generates a 100%-OK input for Calculator.
+3. Calculator generates a UserOutput for a given UserInput, with all calculation data stored in Calculation.
+4. ApplicationView shows UserOutput to the user.
+
+We've applied **Model View Controller** design pattern, but in future we'll add more design patterns!
 
 ### Tech used
 
