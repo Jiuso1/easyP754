@@ -29,4 +29,3 @@ tasks.test {
 application {
     mainClass = "com.team.Main"
 }
-
