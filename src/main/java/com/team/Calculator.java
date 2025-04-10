@@ -45,6 +45,9 @@ public class Calculator {
                     excess = 1023;
                     break;
                 }
+                case HALF: {
+                    excess = 7;
+                }
             }
 
             number = userInput.getNumber().abs();//number values the absolute value of the user input. Negative sign is ignored.
@@ -80,6 +83,11 @@ public class Calculator {
             case DOUBLE: {
                 numberOfExponentBits = 11;
                 numberOfMantissaBits = 52;
+                break;
+            }
+            case HALF: {
+                numberOfExponentBits = 4;
+                numberOfMantissaBits = 11;
                 break;
             }
         }
@@ -185,6 +193,12 @@ public class Calculator {
                 excess = 1023;
                 break;
             }
+            case HALF: {
+                numberOfExponentBits = 4;
+                numberOfMantissaBits = 11;
+                excess = 7;
+                break;
+            }
         }
 
         //Memory is reserved to exponent and mantissa. Constructor specifies the number of bits:
@@ -265,6 +279,12 @@ public class Calculator {
                 numberOfExponentBits = 11;
                 numberOfMantissaBits = 52;
                 excess = 1023;
+                break;
+            }
+            case HALF: {
+                numberOfExponentBits = 4;
+                numberOfMantissaBits = 11;
+                excess = 7;
                 break;
             }
         }

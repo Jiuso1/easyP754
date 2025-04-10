@@ -2,6 +2,7 @@
 enum PrecisionMode {
     SIMPLE
     DOUBLE
+    HALF
 }
 
 enum NumberType {
