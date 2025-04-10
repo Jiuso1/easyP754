@@ -64,8 +64,8 @@ public class ApplicationView extends Application {
                     break;
                 }
                 case HALF: {
-                    numberOfExponentBits = 4;
-                    numberOfMantissaBits = 11;
+                    numberOfExponentBits = 5;
+                    numberOfMantissaBits = 10;
                     break;
                 }
             }

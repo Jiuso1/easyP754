@@ -46,7 +46,7 @@ public class Calculator {
                     break;
                 }
                 case HALF: {
-                    excess = 7;
+                    excess = 15;
                 }
             }
 
@@ -86,8 +86,8 @@ public class Calculator {
                 break;
             }
             case HALF: {
-                numberOfExponentBits = 4;
-                numberOfMantissaBits = 11;
+                numberOfExponentBits = 5;
+                numberOfMantissaBits = 10;
                 break;
             }
         }
@@ -194,9 +194,9 @@ public class Calculator {
                 break;
             }
             case HALF: {
-                numberOfExponentBits = 4;
-                numberOfMantissaBits = 11;
-                excess = 7;
+                numberOfExponentBits = 5;
+                numberOfMantissaBits = 10;
+                excess = 15;
                 break;
             }
         }
@@ -282,9 +282,9 @@ public class Calculator {
                 break;
             }
             case HALF: {
-                numberOfExponentBits = 4;
-                numberOfMantissaBits = 11;
-                excess = 7;
+                numberOfExponentBits = 5;
+                numberOfMantissaBits = 10;
+                excess = 15;
                 break;
             }
         }
