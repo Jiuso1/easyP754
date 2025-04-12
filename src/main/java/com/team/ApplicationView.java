@@ -21,7 +21,7 @@ public class ApplicationView extends Application {
         TextField inputTextField = new TextField();//Create an input TextField.
         TextArea outputTextArea = new TextArea();//Create an output TextArea.
         ObservableList<PrecisionMode> items = FXCollections.observableArrayList();//Create a collection of PrecisionMode items. Source: https://acodigo.blogspot.com/2015/04/javafx-uso-de-combobox.html
-        items.addAll(PrecisionMode.SIMPLE, PrecisionMode.DOUBLE, PrecisionMode.HALF);//Modes are added as items.
+        items.addAll(PrecisionMode.SIMPLE, PrecisionMode.DOUBLE, PrecisionMode.HALF, PrecisionMode.QUADRUPLE, PrecisionMode.OCTUPLE);//Modes are added as items.
         ComboBox<PrecisionMode> precisionModeComboBox = new ComboBox<>(items);//Create a precision mode ComboBox with given items.
         precisionModeComboBox.setValue(items.getFirst());//Default mode is set to Simple precision (first item).
         Button button = new Button("Calculate");//Create a button with specified text.
@@ -66,6 +66,16 @@ public class ApplicationView extends Application {
                 case HALF: {
                     numberOfExponentBits = 5;
                     numberOfMantissaBits = 10;
+                    break;
+                }
+                case QUADRUPLE: {
+                    numberOfExponentBits = 15;
+                    numberOfMantissaBits = 112;
+                    break;
+                }
+                case OCTUPLE: {
+                    numberOfExponentBits = 19;
+                    numberOfMantissaBits = 236;
                     break;
                 }
             }

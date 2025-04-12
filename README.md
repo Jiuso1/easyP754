@@ -5,9 +5,18 @@
 
 ### What it is
 
-A JavaFX app that shows the IEEE P754 representation of the number entered (in both single and double precision). All
-calculations done are shown. 1000
-decimals are used in almost every operation.
+A JavaFX app that shows the IEEE P754 representation of the number entered. All
+calculations done are shown. 1000 decimals are used in almost every operation.
+
+If you want to use easyP754, clone this repository and open the folder with IntelliJ.
+
+### Supported precision modes
+
+* Simple precision (32b).
+* Double precision (64b).
+* Half precision (16b).
+* Quadruple precision (128b).
+* Octuple precision (256b).
 
 ### Input examples
 
@@ -31,6 +40,14 @@ decimals are used in almost every operation.
 2^-127
 ```
 
+```text
++0
+```
+
+```text
+-inf
+```
+
 ### Class diagram
 
 The class diagram has helped us a lot to create an organized and readable software for humans.
@@ -44,6 +61,12 @@ The class diagram has helped us a lot to create an organized and readable softwa
 4. ApplicationView shows UserOutput to the user.
 
 We've applied **Model View Controller** design pattern, but in future we'll add more design patterns!
+
+### To do
+
+1. Fix negative basis bug. Explanation: If you enter -a^b easyP754 computes (-a)^b.
+2. Improve GUI. The graphical user interface should be easy to use and read.
+3. Launch first release.
 
 ### Tech used
 

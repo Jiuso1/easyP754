@@ -47,6 +47,15 @@ public class Calculator {
                 }
                 case HALF: {
                     excess = 15;
+                    break;
+                }
+                case QUADRUPLE: {
+                    excess = 16383;
+                    break;
+                }
+                case OCTUPLE: {
+                    excess = 262143;
+                    break;
                 }
             }
 
@@ -90,6 +99,16 @@ public class Calculator {
                 numberOfMantissaBits = 10;
                 break;
             }
+            case QUADRUPLE: {
+                numberOfExponentBits = 15;
+                numberOfMantissaBits = 112;
+                break;
+            }
+            case OCTUPLE: {
+                numberOfExponentBits = 19;
+                numberOfMantissaBits = 236;
+                break;
+            }
         }
 
         switch (text) {
@@ -116,7 +135,7 @@ public class Calculator {
                 }
                 break;
             }
-            case "+ꝏ": {
+            case "+inf": {
                 exponent = new BitSet(numberOfExponentBits);//BitSet constructor specifies the number of bits.
                 mantissa = new BitSet(numberOfMantissaBits);
                 for (int i = 0; i < numberOfExponentBits; i++) {//All exponent bits are set to 1:
@@ -127,7 +146,7 @@ public class Calculator {
                 }
                 break;
             }
-            case "-ꝏ": {
+            case "-inf": {
                 sign = true;//As the text has - symbol, sign values true or 1.
                 exponent = new BitSet(numberOfExponentBits);//BitSet constructor specifies the number of bits.
                 mantissa = new BitSet(numberOfMantissaBits);
@@ -197,6 +216,18 @@ public class Calculator {
                 numberOfExponentBits = 5;
                 numberOfMantissaBits = 10;
                 excess = 15;
+                break;
+            }
+            case QUADRUPLE: {
+                numberOfExponentBits = 15;
+                numberOfMantissaBits = 112;
+                excess = 16383;
+                break;
+            }
+            case OCTUPLE: {
+                numberOfExponentBits = 19;
+                numberOfMantissaBits = 236;
+                excess = 262143;
                 break;
             }
         }
@@ -285,6 +316,18 @@ public class Calculator {
                 numberOfExponentBits = 5;
                 numberOfMantissaBits = 10;
                 excess = 15;
+                break;
+            }
+            case QUADRUPLE: {
+                numberOfExponentBits = 15;
+                numberOfMantissaBits = 112;
+                excess = 16383;
+                break;
+            }
+            case OCTUPLE: {
+                numberOfExponentBits = 19;
+                numberOfMantissaBits = 236;
+                excess = 262143;
                 break;
             }
         }

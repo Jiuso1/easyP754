@@ -3,6 +3,8 @@ enum PrecisionMode {
     SIMPLE
     DOUBLE
     HALF
+    QUADRUPLE
+    OCTUPLE
 }
 
 enum NumberType {
