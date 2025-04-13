@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -25,7 +26,12 @@ public class ApplicationView extends Application {
         ComboBox<PrecisionMode> precisionModeComboBox = new ComboBox<>(items);//Create a precision mode ComboBox with given items.
         precisionModeComboBox.setValue(items.getFirst());//Default mode is set to Simple precision (first item).
         Button button = new Button("Calculate");//Create a button with specified text.
-        button.setOnAction(a -> generateOutputTextArea(inputTextField, precisionModeComboBox, outputTextArea));
+        button.setOnAction(a -> generateOutputTextArea(inputTextField, precisionModeComboBox, outputTextArea));//When button is clicked generateOutputTextArea is called.
+        inputTextField.setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.ENTER) {
+                generateOutputTextArea(inputTextField, precisionModeComboBox, outputTextArea);
+            }
+        });
         Font font = new Font("Arial", 20);//Create a font for the output style.
         outputTextArea.setEditable(false);//output isn't editable.
         outputTextArea.setFont(font);//output has Arial 20 font.

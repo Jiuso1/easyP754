@@ -112,6 +112,17 @@ public class Calculator {
         }
 
         switch (text) {
+            case "0": {
+                exponent = new BitSet(numberOfExponentBits);//BitSet constructor specifies the number of bits.
+                mantissa = new BitSet(numberOfMantissaBits);
+                for (int i = 0; i < numberOfExponentBits; i++) {//All exponent bits are set to 0:
+                    exponent.set(i, false);
+                }
+                for (int i = 0; i < numberOfMantissaBits; i++) {//All mantissa bits are set to 0:
+                    mantissa.set(i, false);
+                }
+                break;
+            }
             case "+0": {
                 exponent = new BitSet(numberOfExponentBits);//BitSet constructor specifies the number of bits.
                 mantissa = new BitSet(numberOfMantissaBits);
@@ -129,6 +140,17 @@ public class Calculator {
                 mantissa = new BitSet(numberOfMantissaBits);
                 for (int i = 0; i < numberOfExponentBits; i++) {//All exponent bits are set to 0:
                     exponent.set(i, false);
+                }
+                for (int i = 0; i < numberOfMantissaBits; i++) {//All mantissa bits are set to 0:
+                    mantissa.set(i, false);
+                }
+                break;
+            }
+            case "inf": {
+                exponent = new BitSet(numberOfExponentBits);//BitSet constructor specifies the number of bits.
+                mantissa = new BitSet(numberOfMantissaBits);
+                for (int i = 0; i < numberOfExponentBits; i++) {//All exponent bits are set to 1:
+                    exponent.set(i, true);
                 }
                 for (int i = 0; i < numberOfMantissaBits; i++) {//All mantissa bits are set to 0:
                     mantissa.set(i, false);
