@@ -27,15 +27,15 @@ public class ApplicationView extends Application {
         precisionModeComboBox.setValue(items.getFirst());//Default mode is set to Simple precision (first item).
         Button button = new Button("Calculate");//Create a button with specified text.
         button.setOnAction(a -> generateOutputTextArea(inputTextField, precisionModeComboBox, outputTextArea));//When button is clicked generateOutputTextArea is called.
-        inputTextField.setOnKeyPressed(e -> {
-            if (e.getCode() == KeyCode.ENTER) {
-                generateOutputTextArea(inputTextField, precisionModeComboBox, outputTextArea);
+        inputTextField.setOnKeyPressed(e -> {//When a key is pressed:
+            if (e.getCode() == KeyCode.ENTER) {//If the key is ENTER:
+                generateOutputTextArea(inputTextField, precisionModeComboBox, outputTextArea);//generateOutputTextArea is called.
             }
         });
         Font font = new Font("Arial", 20);//Create a font for the output style.
         outputTextArea.setEditable(false);//output isn't editable.
         outputTextArea.setFont(font);//output has Arial 20 font.
-        outputTextArea.setPrefHeight(600);
+        outputTextArea.setPrefHeight(600);//output has a height of 600 pixels.
         hBox.setAlignment(Pos.TOP_CENTER);//The horizontal box is aligned with the top center.
         hBox.getChildren().addAll(inputTextField, precisionModeComboBox, button);//Add input and button as children of hBox.
         root.getChildren().addAll(hBox, outputTextArea);//Add hBox and output as children of root.
@@ -142,12 +142,12 @@ public class ApplicationView extends Application {
             outputString += "Exponent: ";
 
             //Don't use BitSet.length(), use your own variables. Source: https://stackoverflow.com/questions/40786466/how-get-real-length-of-bitset
-            for (int i = 0; i < numberOfExponentBits; i++) {//All exponent bits are set to 0:
+            for (int i = 0; i < numberOfExponentBits; i++) {//All exponent bits are written:
                 outputString += userOutput.getExponent().get(i) ? "1" : "0";
             }
             outputString += "\n";
             outputString += "Mantissa: ";
-            for (int i = 0; i < numberOfMantissaBits; i++) {//All mantissa bits are set to 0:
+            for (int i = 0; i < numberOfMantissaBits; i++) {//All mantissa bits are written:
                 outputString += userOutput.getMantissa().get(i) ? "1" : "0";
             }
             outputString += "\n";

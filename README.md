@@ -50,21 +50,21 @@ If you want to use easyP754, clone this repository and open the folder with Inte
 
 ### Class diagram
 
-The class diagram has helped us a lot to create an organized and readable software for humans.
+The class diagram has helped us a lot to create organized and readable software for humans.
 [uml.txt](src/main/resources/uml.txt) has PlantUML code that generates the following class diagram.
 
 ![Class diagram](src/main/resources/uml.png)
 
-1. ApplicationView asks user a text input.
+1. ApplicationView asks the user for a text input.
 2. UserInput generates a 100%-OK input for Calculator.
 3. Calculator generates a UserOutput for a given UserInput, with all calculation data stored in Calculation.
 4. ApplicationView shows UserOutput to the user.
 
-We've applied **Model View Controller** design pattern, but in future we'll add more design patterns!
+We've applied the **Model View Controller** design pattern, but in the future, we'll add more design patterns!
 
 ### To do
 
-1. Fix negative basis bug. Explanation: If you enter -a^b easyP754 computes (-a)^b.
+1. Fix the negative basis bug. Explanation: If you enter -a^b easyP754 computes (-a)^b.
 2. Improve GUI. The graphical user interface should be easy to use and read.
 3. Launch first release.
 
@@ -97,4 +97,15 @@ In summary, I dedicate this application to Borja wherever he is.
 
 ### Personal acknowledgments
 
-Thanks to all my friends and family. Without their support this app couldn't exist.
+Thanks to all my friends and family. Without their support, this app couldn't exist.
+
+My brother Héctor García Gutiérrez gave me the idea of supporting the key button to calculate.
+He has supported me a lot and he has always liked my application.
+
+Manuel Camacho Campos ([iBManu](https://github.com/iBManu)) and Jesús Bogarín Hernández have always been there. They
+always have inspired and motivated me.
+
+[Andriy Yaskiv](https://github.com/Andriyaskiv) has always made me smile and reminded me that soft skills are equal as
+important as hard skills.
+
+This app is in honor of them and many more people who, due to text size problems, do not appear.
