@@ -64,9 +64,8 @@ We've applied the **Model View Controller** design pattern, but in the future, w
 
 ### To do
 
-1. Fix the negative basis bug. Explanation: If you enter -a^b easyP754 computes (-a)^b.
-2. Improve GUI. The graphical user interface should be easy to use and read.
-3. Launch first release.
+1. Improve GUI. The graphical user interface should be easy to use and read.
+2. Launch first release.
 
 ### Tech used
 
@@ -108,4 +107,6 @@ always have inspired and motivated me.
 [Andriy Yaskiv](https://github.com/Andriyaskiv) has always made me smile and reminded me that soft skills are equal as
 important as hard skills.
 
-This app is in honor of them and many more people who, due to text size problems, do not appear.
+Ignacio Velázquez Muñoz has helped me to grow my vision and dreams. Long walks that made things clear.
+
+This app is in honor of them and more people who, due to text size problems, do not appear.

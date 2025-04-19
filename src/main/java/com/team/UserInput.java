@@ -15,7 +15,10 @@ public class UserInput {
         MathContext mathContext = new MathContext(1000);//1000 digit precision.
         BigDecimal base = null;//Power base BigDecimal object.
         BigDecimal exponent = null;//Exponent base BigDecimal object.
+        String baseString = "";//Power base String object.
+        String exponentString = "";//Power base String object.
         int exponentSymbolIndex = 0;//Index where '^' is stored in text.
+        boolean sign = false;//Values true if number is negative.
 
         //Parameters are assigned to attributes:
         this.text = text;
@@ -25,9 +28,19 @@ public class UserInput {
             if (this.text.contains("^")) {//If text contains '^':
                 exponentSymbolIndex = text.indexOf('^');//Index where '^' places is stored.
                 //Given a^b, a is the previous number to '^' and b is the next number to '^':
-                base = new BigDecimal(text.substring(0, exponentSymbolIndex));
-                exponent = new BigDecimal(text.substring(exponentSymbolIndex + 1));
+                baseString = text.substring(0, exponentSymbolIndex);
+                exponentString = text.substring(exponentSymbolIndex + 1);
+                if (baseString.contains("-")) {//If baseString contains "-":
+                    baseString = baseString.replaceAll("-", "");//baseString updates with minus character removed.
+                    sign = true;//Sign values 1.
+                }
+                //BigDecimal objects are constructed from String objects:
+                base = new BigDecimal(baseString);
+                exponent = new BigDecimal(exponentString);
                 number = BigDecimalMath.pow(base, exponent, mathContext);//We try to get a BigDecimal calculating a^b.
+                if (sign == true) {//If sign values true:
+                    number = number.negate();//number updates with the original value, negating the absolute value.
+                }
             } else {//If text doesn't contain '^':
                 this.number = new BigDecimal(text);//We try to get a BigDecimal from the text using BigDecimal(String) constructor.
             }
