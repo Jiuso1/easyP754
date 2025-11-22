@@ -11,6 +11,7 @@
   <component name="ChangeListManager">
     <list default="true" id="07539983-5cbc-47a8-83c3-618fe01a3b6b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.gradle/8.10/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10/checksums/md5-checksums.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.10/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10/checksums/sha1-checksums.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.10/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.10/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10/executionHistory/executionHistory.lock" afterDir="false" />
@@ -21,12 +22,18 @@
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/team/UserInput.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/team/UserInput.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ApplicationView$1.class.uniqueId2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ApplicationView.class.uniqueId0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Main.class.uniqueId1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/team/ApplicationView$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/team/ApplicationView$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/team/ApplicationView.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/team/ApplicationView.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/secondDemo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ApplicationView$1.class.uniqueId4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ApplicationView.class.uniqueId3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Calculator$1.class.uniqueId2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Calculator.class.uniqueId0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/UserInput.class.uniqueId1" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/team/UserInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/team/UserInput.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/team/ApplicationView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/team/ApplicationView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/firstDemo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/secondDemo.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,6 +73,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GradleScriptDefinitionsStorage" workingDir="$PROJECT_DIR$" gradleHome="C:\Users\jesus\.gradle\wrapper\dists\gradle-8.10-bin\deqhafrv1ntovfmgh0nh3npr9\gradle-8.10" javaHome="C:\Program Files\Java\jdk-21" gradleVersion="8.10" />
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -77,43 +85,47 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Application.Main.executor": "Coverage",
-    "Gradle.Build easyP754.executor": "Run",
-    "Gradle.easyP754 [:com.team.HelloFX.main()].executor": "Run",
-    "Gradle.easyP754 [:com.team.HelloSwingWorld2.main()].executor": "Run",
-    "Gradle.easyP754 [:com.team.HelloWorldSwing.main()].executor": "Run",
-    "Gradle.easyP754 [:com.team.JavaFXMain.main()].executor": "Run",
-    "Gradle.easyP754 [:com.team.Main.main()].executor": "Run",
-    "Gradle.easyP754 [:com.team.MainApplication.main()].executor": "Run",
-    "Gradle.easyP754 [:com.team.OldMain.main()].executor": "Run",
-    "Gradle.easyP754 [:com.team.QMain.main()].executor": "Run",
-    "Gradle.easyP754 [:com.team.SwingMain.main()].executor": "Run",
-    "Gradle.easyP754 [:com.team.Test.main()].executor": "Run",
-    "JAR Application.Unnamed.executor": "Run",
-    "JAR Application.easyP754Jar.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
-    "junie.onboarding.icon.badge.shown": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/jesus/Documents/java/proyectos/easyP754/out/artifacts/easyP754_jar/easyP754.jar",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "onboarding.tips.debug.path": "C:/Users/jesus/Documents/java/proyectos/easyP754/src/main/java/com/team/Main.java",
-    "project.structure.last.edited": "Artifacts",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Coverage&quot;,
+    &quot;Gradle.Build easyP754.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Download Sources.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.easyP754 [:com.team.HelloFX.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.easyP754 [:com.team.HelloSwingWorld2.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.easyP754 [:com.team.HelloWorldSwing.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.easyP754 [:com.team.JavaFXMain.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.easyP754 [:com.team.Main.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.easyP754 [:com.team.MainApplication.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.easyP754 [:com.team.OldMain.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.easyP754 [:com.team.QMain.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.easyP754 [:com.team.SwingMain.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.easyP754 [:com.team.Test.main()].executor&quot;: &quot;Run&quot;,
+    &quot;JAR Application.Unnamed.executor&quot;: &quot;Run&quot;,
+    &quot;JAR Application.easyP754Jar.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1&quot;: &quot;true&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/jesus/Documents/java/proyectos/easyP754/out/artifacts/easyP754_jar/easyP754.jar&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/jesus/Documents/java/proyectos/easyP754/src/main/java/com/team/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Application.Main">
     <configuration name="ApplicationView" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.team.ApplicationView" />
@@ -213,8 +225,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.23774.435" />
-        <option value="bundled-js-predefined-d6986cc7102b-f27c65a3e318-JavaScript-IU-251.23774.435" />
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.27397.103" />
+        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-IU-252.27397.103" />
       </set>
     </attachedChunks>
   </component>
@@ -382,6 +394,42 @@
       <workItem from="1745099136251" duration="506000" />
       <workItem from="1745099669730" duration="73000" />
       <workItem from="1745099758436" duration="2441000" />
+      <workItem from="1745235374206" duration="635000" />
+      <workItem from="1745511312250" duration="507000" />
+      <workItem from="1745836967925" duration="126000" />
+      <workItem from="1746123691876" duration="538000" />
+      <workItem from="1746134083281" duration="43000" />
+      <workItem from="1746722307449" duration="116000" />
+      <workItem from="1747043897813" duration="178000" />
+      <workItem from="1747044448968" duration="504000" />
+      <workItem from="1747048706729" duration="622000" />
+      <workItem from="1747077860452" duration="17000" />
+      <workItem from="1747134186705" duration="221000" />
+      <workItem from="1747508498584" duration="6000" />
+      <workItem from="1747764193677" duration="249000" />
+      <workItem from="1747821649262" duration="6000" />
+      <workItem from="1748000449629" duration="377000" />
+      <workItem from="1748432891693" duration="1508000" />
+      <workItem from="1748612194292" duration="100000" />
+      <workItem from="1748888227687" duration="373000" />
+      <workItem from="1748970231269" duration="11000" />
+      <workItem from="1755453400733" duration="648000" />
+      <workItem from="1755454336241" duration="361000" />
+      <workItem from="1755454725645" duration="95000" />
+      <workItem from="1756169642179" duration="167000" />
+      <workItem from="1758470795948" duration="134000" />
+      <workItem from="1759089742679" duration="138000" />
+      <workItem from="1759090374074" duration="124000" />
+      <workItem from="1761213683931" duration="156000" />
+      <workItem from="1761760697949" duration="125000" />
+      <workItem from="1762449709255" duration="93000" />
+      <workItem from="1763381239593" duration="132000" />
+      <workItem from="1763560328091" duration="377000" />
+      <workItem from="1763575773338" duration="176000" />
+      <workItem from="1763827052425" duration="675000" />
+      <workItem from="1763827855400" duration="1234000" />
+      <workItem from="1763829649454" duration="1910000" />
+      <workItem from="1763831772178" duration="230000" />
     </task>
     <servers />
   </component>

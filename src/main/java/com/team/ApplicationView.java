@@ -32,7 +32,8 @@ public class ApplicationView extends Application {
                 generateOutputTextArea(inputTextField, precisionModeComboBox, outputTextArea);//generateOutputTextArea is called.
             }
         });
-        Font font = new Font("Arial", 20);//Create a font for the output style.
+        System.out.println(javafx.scene.text.Font.getFamilies());//Source: https://stackoverflow.com/questions/32439352/font-families-available-in-javafx-8
+        Font font = new Font("Source Sans Pro", 20);//Create a font for the output style.
         outputTextArea.setEditable(false);//output isn't editable.
         outputTextArea.setFont(font);//output has Arial 20 font.
         outputTextArea.setPrefHeight(600);//output has a height of 600 pixels.
@@ -105,7 +106,7 @@ public class ApplicationView extends Application {
                         outputString += "X = 1,0\n";
                         outputString += userOutput.getNumber().abs() + " = 1,0 • 2^Y'\n";
                         outputString += userOutput.getNumber().abs() + " = 2^Y'\n";
-                        outputString += "log_2(" + userOutput.getNumber().abs() + ") = Y'\n";
+                        outputString += "log₂ " + userOutput.getNumber().abs() + " = Y'\n";
                         outputString += "Y' = " + userOutput.getCalculation().getDecimalY() + "\n";
                         outputString += "Y = " + userOutput.getCalculation().getY() + "\n";
                         outputString += "Y = E - " + userOutput.getCalculation().getExcess() + "\n";

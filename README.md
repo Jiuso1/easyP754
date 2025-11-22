@@ -1,7 +1,6 @@
 # easyP754
 
-![easyP754 calculation output for 3.1415](src/main/resources/firstDemo.png)
-![easyP754 binary output for 3.1415](src/main/resources/secondDemo.png)
+![easyP754 calculation output for 3.1415](src/main/resources/demo.png)
 
 ### What it is
 
