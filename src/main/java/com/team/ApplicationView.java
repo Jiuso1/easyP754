@@ -107,7 +107,7 @@ public class ApplicationView extends Application {
                         outputString += userOutput.getNumber().abs() + " = 1,0 • 2^Y'\n";
                         outputString += userOutput.getNumber().abs() + " = 2^Y'\n";
                         outputString += "log₂ " + userOutput.getNumber().abs() + " = Y'\n";
-                        outputString += "Y' = " + userOutput.getCalculation().getDecimalY() + "\n";
+                        outputString += "Y' = " + userOutput.getCalculation().getDecimalY().toString().substring(0, 10) + "\n";
                         outputString += "Y = " + userOutput.getCalculation().getY() + "\n";
                         outputString += "Y = E - " + userOutput.getCalculation().getExcess() + "\n";
                         outputString += userOutput.getCalculation().getY() + " = E - " + userOutput.getCalculation().getExcess() + "\n";
