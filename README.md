@@ -61,11 +61,6 @@ The class diagram has helped us a lot to create organized and readable software 
 
 We've applied the **Model View Controller** design pattern, but in the future, we'll add more design patterns!
 
-### To do
-
-1. Improve GUI. The graphical user interface should be easy to use and read.
-2. Launch first release.
-
 ### Tech used
 
 * [PlantUML](https://plantuml.com)
@@ -103,7 +98,7 @@ He has supported me a lot and he has always liked my application.
 Manuel Camacho Campos ([iBManu](https://github.com/iBManu)) and Jesús Bogarín Hernández have always been there. They
 always have inspired and motivated me.
 
-[Andriy Yaskiv](https://github.com/Andriyaskiv) has always made me smile and reminded me that soft skills are equal as
+Andriy Yaskiv ([Andriyaskiv](https://github.com/Andriyaskiv)) has always made me smile and reminded me that soft skills are equal as
 important as hard skills.
 
 Ignacio Velázquez Muñoz has helped me to grow my vision and dreams. Long walks that made things clear.
