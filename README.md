@@ -1,6 +1,6 @@
 # easyP754
 
-![easyP754 calculation output for 3.1415](src/main/resources/demo.png)
+![easyP754 calculation output for 3.1415](src/main/resources/demo.gif)
 
 ### What it is
 
@@ -98,7 +98,8 @@ He has supported me a lot and he has always liked my application.
 Manuel Camacho Campos ([iBManu](https://github.com/iBManu)) and Jesús Bogarín Hernández have always been there. They
 always have inspired and motivated me.
 
-Andriy Yaskiv ([Andriyaskiv](https://github.com/Andriyaskiv)) has always made me smile and reminded me that soft skills are equal as
+Andriy Yaskiv ([Andriyaskiv](https://github.com/Andriyaskiv)) has always made me smile and reminded me that soft skills
+are equal as
 important as hard skills.
 
 Ignacio Velázquez Muñoz has helped me to grow my vision and dreams. Long walks that made things clear.

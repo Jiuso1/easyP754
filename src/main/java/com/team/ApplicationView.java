@@ -32,7 +32,6 @@ public class ApplicationView extends Application {
                 generateOutputTextArea(inputTextField, precisionModeComboBox, outputTextArea);//generateOutputTextArea is called.
             }
         });
-        System.out.println(javafx.scene.text.Font.getFamilies());//Source: https://stackoverflow.com/questions/32439352/font-families-available-in-javafx-8
         Font font = new Font("Source Sans Pro", 20);//Create a font for the output style.
         outputTextArea.setEditable(false);//output isn't editable.
         outputTextArea.setFont(font);//output has Arial 20 font.
@@ -91,8 +90,8 @@ public class ApplicationView extends Application {
                 outputString += "userOutput is special.\n";
             } else {
                 outputString += "userOutput is not special.\n";
-                outputString += "V(X) = (-1)^S • 1,M • 2^(E - EXCESS)\n";
-                outputString += "V(X) = (-1)^0 • 1,0 • 2^(1 - " + userOutput.getCalculation().getExcess() + ")\n";
+                outputString += "V(X) = (-1)^S • 1.M • 2^(E - EXCESS)\n";
+                outputString += "V(X) = (-1)^0 • 1.0 • 2^(1 - " + userOutput.getCalculation().getExcess() + ")\n";
                 outputString += "V(X) = 2^(-" + userOutput.getCalculation().getExcessMinusOne() + ")\n";
                 outputString += "Using |" + userOutput.getNumber() + "|, changing sign bit if needed.\n";
 
@@ -100,11 +99,11 @@ public class ApplicationView extends Application {
                     case NORMALIZED: {
                         outputString += userOutput.getNumber().abs() + " ≥ 2^(-" + userOutput.getCalculation().getExcessMinusOne() + ")\n";
                         outputString += "userOutput is normalized.\n";
-                        outputString += "V(X) = " + userOutput.getNumber().abs() + " = 1,M • 2^(E - " + userOutput.getCalculation().getExcess() + ")\n";
-                        outputString += "X = 1,M ; 1 ≤ X < 2\n";
+                        outputString += "V(X) = " + userOutput.getNumber().abs() + " = 1.M • 2^(E - " + userOutput.getCalculation().getExcess() + ")\n";
+                        outputString += "X = 1.M ; 1 ≤ X < 2\n";
                         outputString += "Y = E - " + userOutput.getCalculation().getExcess() + " ; Y ∈ ℤ\n";
-                        outputString += "X = 1,0\n";
-                        outputString += userOutput.getNumber().abs() + " = 1,0 • 2^Y'\n";
+                        outputString += "X = 1.0\n";
+                        outputString += userOutput.getNumber().abs() + " = 1.0 • 2^Y'\n";
                         outputString += userOutput.getNumber().abs() + " = 2^Y'\n";
                         outputString += "log₂ " + userOutput.getNumber().abs() + " = Y'\n";
                         outputString += "Y' = " + userOutput.getCalculation().getDecimalY().toString().substring(0, 10) + "\n";
@@ -124,10 +123,10 @@ public class ApplicationView extends Application {
                     case DENORMALIZED: {
                         outputString += userOutput.getNumber().abs() + " < 2^(-" + userOutput.getCalculation().getExcessMinusOne() + ")\n";
                         outputString += "userOutput is denormalized.\n";
-                        outputString += "V(X) = " + userOutput.getNumber().abs() + " = 0,M • 2^(-E" + " + 1)\n";
-                        outputString += "V(X) = " + userOutput.getNumber().abs() + " = 0,M • 2^(-" + userOutput.getCalculation().getExcess() + " + 1)\n";
-                        outputString += "V(X) = " + userOutput.getNumber().abs() + " = 0,M • 2^(-" + userOutput.getCalculation().getExcessMinusOne() + ")\n";
-                        outputString += "X = 0,M ; 0 ≤ X < 1\n";
+                        outputString += "V(X) = " + userOutput.getNumber().abs() + " = 0.M • 2^(-E" + " + 1)\n";
+                        outputString += "V(X) = " + userOutput.getNumber().abs() + " = 0.M • 2^(-" + userOutput.getCalculation().getExcess() + " + 1)\n";
+                        outputString += "V(X) = " + userOutput.getNumber().abs() + " = 0.M • 2^(-" + userOutput.getCalculation().getExcessMinusOne() + ")\n";
+                        outputString += "X = 0.M ; 0 ≤ X < 1\n";
                         outputString += "V(X) = " + userOutput.getNumber().abs() + " = X • 2^(-" + userOutput.getCalculation().getExcessMinusOne() + ")\n";
                         outputString += "X = " + userOutput.getNumber().abs() + " ÷ 2^(-" + userOutput.getCalculation().getExcessMinusOne() + ")\n";
                         outputString += "X = " + userOutput.getCalculation().getX() + "\n";
